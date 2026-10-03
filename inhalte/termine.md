@@ -87,6 +87,11 @@ CorrelAid
 mit CorrelAid
 📅 Montag, 2. November 2026 | 13:00–14:00 Uhr
 
+AWO Weiterbildung
+[Workshop KI (Künstliche Intelligenz) für die Praxis](https://www.awo-wkb.de/kurse/verwaltung-und-it/kurs/KI-Grundlagen-fuer-die-Praxis/262E-35112)
+mit Elena Fronk
+📅 Mittwoch, 4. November 2026 | 9:00–13:00 Uhr
+
 Haus des Stiftens
 [MS Copilot – Smarter arbeiten mit KI](https://www.hausdesstiftens.org/online-workshop/ms-copilot-smarter-arbeiten-mit-ki-4/)
 mit Barbara Zeidler
