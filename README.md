@@ -14,7 +14,7 @@ Inhalte (Texte, Termine, Links)  →  GitHub  →  automatische Prüfung  →  V
                                die eine von uns annimmt
 ```
 
-- **Termine** stehen in einer Liste (`src/_data/termine.yaml`). Vergangene Termine verschwinden jede Nacht
+- **Termine** stehen als lesbarer Text in `inhalte/termine.md`, so wie auf der Website. Vergangene Termine verschwinden jede Nacht
   automatisch von der Seite.
 - **Wissenspool-Links** stehen ebenfalls in einer Liste (`src/_data/wissenspool.yaml`).
 - **Alle anderen Seiten** (Startseite, Trainer\*innen, Leitlinien, Impressum …) sind 1:1 aus WordPress

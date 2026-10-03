@@ -21,7 +21,7 @@ Jede Datei lässt sich auf github.com mit dem Stift-Symbol bearbeiten. Unten dan
 
 | Seite | Datei | Hinweis |
 |---|---|---|
-| Workshops: Terminliste | `src/_data/termine.yaml` | Liste, siehe unten |
+| Workshops: Terminliste | `inhalte/termine.md` | lesbarer Text, siehe unten |
 | Workshops: übriger Text | `src/seiten/workshops.njk` | HTML |
 | Wissenspool: Favoriten und Links | `src/_data/wissenspool.yaml` | Liste, siehe unten |
 | Startseite | `src/seiten/index.html` | HTML |
@@ -36,30 +36,38 @@ Jede Datei lässt sich auf github.com mit dem Stift-Symbol bearbeiten. Unten dan
 gefahrlos ändern. Die Zeichen in spitzen Klammern bitte stehen lassen. Geht doch etwas schief, meldet die
 Prüfung den Fehler, und die alte Seite bleibt online.
 
-## 3. Termine: die Felder
+## 3. Termine eintragen
 
-```yaml
-termine:
-  - anbieter: Haus des Stiftens          # Pflicht
-    titel: Prompting mit Plan            # Pflicht
-    url: https://www.hausdesstiftens.org/…   # Pflicht, Link zur Veranstaltung
-    mit: Julia                           # Trainer*innen, ohne „mit“
-    datum: 2026-10-07                    # Pflicht: JJJJ-MM-TT
-    zeit: 9:00–13:00 Uhr
-    ort: online
-    kostenlos: true                      # nur wenn kostenlos; Preise nie eintragen
-    anmeldeschluss: 12. November
+Die Termine stehen in `inhalte/termine.md`, und zwar so, wie sie auf der Website erscheinen.
+Am einfachsten kopiert ihr einen vorhandenen Termin und passt ihn an:
+
+```
+## Oktober 2026
+
+Haus des Stiftens
+[Prompting mit Plan – KI clever nutzen im NPO-Alltag](https://www.hausdesstiftens.org/…)
+mit Julia
+📅 Mittwoch, 7. Oktober 2026 | 9:00–13:00 Uhr | online | kostenlos
+
+CorrelAid
+[KI aber ohne den Hype](https://correlaid.org/…)
+📅 Mittwoch, 7. Oktober 2026 | 13:00–14:00 Uhr | online
 ```
 
-Für mehrteilige Kurse gibt es zusätzlich:
+- **1. Zeile:** Anbieter. **2. Zeile:** Titel in eckigen Klammern, direkt dahinter der Link in runden
+  Klammern. **3. Zeile:** „mit …“ (kann fehlen). **Letzte Zeile:** 📅 mit Datum und Jahreszahl.
+- **Zwischen zwei Terminen eine Leerzeile.**
+- Die 📅-Zeile erscheint wörtlich auf der Website. Nach dem Datum folgt mit `|` getrennt, was zutrifft:
+  Uhrzeit, Ort, `kostenlos`, `Anmeldeschluss: 12. November`. **Keine Preise.**
+- Mehrteilige Kurse: `📅 20. Oktober bis 10. November 2026 | …` oder
+  `📅 25. November, 2. und 9. Dezember 2026 | …`. Sie bleiben bis zum letzten Tag sichtbar.
+- Die Monatsüberschriften dienen nur der Übersicht. Die Website sortiert selbst.
+- Vergangene Termine verschwinden automatisch. In der Datei dürfen sie stehen bleiben oder gelöscht werden.
+- Die Prüfung meldet Tippfehler mit Zeilennummer, z. B. „Zeile 36: Der 6. Oktober 2026 ist ein Dienstag,
+  nicht Montag.“ Dann wird nichts veröffentlicht, bis die Zeile korrigiert ist.
 
-```yaml
-    bis: 2026-11-10                      # letzter Termin: bis dahin bleibt der Eintrag sichtbar
-    datum_text: 20. Oktober bis 10. November 2026   # ersetzt „Dienstag, 20. Oktober 2026“
-```
-
-Daraus erzeugt die Seite automatisch Monatsüberschriften, die Sortierung und die Zeile
-„📅 Mittwoch, 7. Oktober 2026 | 9:00–13:00 Uhr | online | kostenlos“.
+Die dauerhaften Angebote (z. B. der Selbstlernkurs) stehen in derselben Datei unter
+`## Dauerhafte Angebote`, jeweils mit einer `### Überschrift`.
 
 ## 4. Wissenspool: die Felder
 

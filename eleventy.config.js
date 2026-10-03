@@ -1,7 +1,7 @@
 import { load as yamlLaden } from "js-yaml";
 import markdownIt from "markdown-it";
 import { HtmlBasePlugin } from "@11ty/eleventy";
-import { aktuelleTermine, nachMonat, terminZeile, heuteInBerlin } from "./scripts/termine.mjs";
+import { aktuelleTermine, nachMonat, heuteInBerlin } from "./scripts/termine.mjs";
 
 const md = markdownIt({ html: false, linkify: false, typographer: false });
 // Externe Links in Markdown-Texten öffnen wie bisher in einem neuen Tab
@@ -17,6 +17,7 @@ md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
 
 export default function (eleventyConfig) {
   eleventyConfig.addDataExtension("yaml", (inhalt) => yamlLaden(inhalt));
+  eleventyConfig.addWatchTarget("inhalte/");
   eleventyConfig.addPassthroughCopy({ "src/wp-content": "wp-content", "src/assets": "assets" });
   eleventyConfig.addPlugin(HtmlBasePlugin);
   // Hintergrundbilder in style="…url(/…)" kennt das Base-Plugin nicht – Pfad-Präfix hier ergänzen.
@@ -29,7 +30,6 @@ export default function (eleventyConfig) {
   eleventyConfig.addGlobalData("heute", heuteInBerlin);
   eleventyConfig.addFilter("aktuelleTermine", (termine) => aktuelleTermine(termine, heuteInBerlin()));
   eleventyConfig.addFilter("nachMonat", (termine) => nachMonat(termine, heuteInBerlin()));
-  eleventyConfig.addFilter("terminZeile", terminZeile);
   eleventyConfig.addFilter("mdinline", (text) => (text ? md.renderInline(String(text)) : ""));
   eleventyConfig.addFilter("extern", (url) => /^https?:/.test(url || ""));
   eleventyConfig.addFilter("spalten", (liste, anzahl) => {
