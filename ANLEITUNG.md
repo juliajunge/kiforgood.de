@@ -166,6 +166,11 @@ Beim nächsten Montags-Update liest die KI das Postfach. Termine kommen in den V
 in den Bericht. Berücksichtigt werden nur Absender\*innen von der Freigabeliste (`ERLAUBTE_ABSENDER`,
 siehe unten).
 
+- Abgeholte Mails werden erst als gelesen markiert, wenn der Vorschlag (Pull Request) erstellt ist.
+  Ungelesene Mails sind also noch nicht verarbeitet.
+- Ist das Postfach nicht erreichbar (z. B. Passwort geändert), läuft das Update trotzdem. Im Bericht
+  steht dann unter „Postfach“ ein Warnhinweis.
+
 ## 7. Notfall: etwas ist schiefgegangen
 
 - **Eine Änderung zurücknehmen:** Auf GitHub unter **Commits** die Änderung öffnen und **Revert** wählen.
@@ -179,7 +184,7 @@ siehe unten).
 |---|---|---|
 | Veröffentlichung einschalten | Settings → Pages → Source | **GitHub Actions** |
 | KI-Zugang (Claude-Abo) | Settings → Secrets and variables → Actions → Secrets | `CLAUDE_CODE_OAUTH_TOKEN` – erzeugen mit `claude setup-token` (alternativ: API-Schlüssel als `ANTHROPIC_API_KEY`) |
-| Postfach (IMAP) | Secrets | `IMAP_HOST` (z. B. `mail.jpberlin.de`), `IMAP_BENUTZER`, `IMAP_PASSWORT` |
+| Postfach (IMAP) | Secrets | `IMAP_HOST` = `mail.jpberlin.de`, `IMAP_BENUTZER` = die volle Adresse `aktualisierung@kiforgood.de`, `IMAP_PASSWORT` |
 | Erlaubte Absender\*innen | Secrets | `ERLAUBTE_ABSENDER`, z. B. `mail@juliajunge.de, @fairlinked.org` |
 | Postfach-Abruf einschalten | Variables | `POSTFACH_AKTIV` = `true` |
 | KI-Vorschläge zulassen | Settings → Actions → General → Workflow permissions | „Allow GitHub Actions to create and approve pull requests“ anhaken |

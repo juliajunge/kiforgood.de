@@ -36,8 +36,11 @@ jobs:
         id: kw
         run: echo "name=$(TZ=Europe/Berlin date +%G-KW%V)" >> "$GITHUB_OUTPUT"
 
+      # Ist das Postfach nicht erreichbar, läuft das Update trotzdem; der Bericht nennt dann das Problem.
       - name: Einreichungen aus dem Postfach abholen
+        id: postfach
         if: vars.POSTFACH_AKTIV == 'true'
+        continue-on-error: true
         run: python3 scripts/postfach-abholen.py abholen
         env:
           IMAP_HOST: ${{ secrets.IMAP_HOST }}
@@ -70,6 +73,9 @@ jobs:
         run: |
           mkdir -p eingang
           test -s eingang/bericht.md || echo "Claude hat keinen Bericht geschrieben. Bitte die Änderungen unter „Files changed“ prüfen." > eingang/bericht.md
+          if [ "${{ steps.postfach.outcome }}" = "failure" ]; then
+            printf '\n## Postfach\n- ⚠️ Das Postfach konnte nicht gelesen werden. Einreichungen sind in diesem Vorschlag nicht enthalten. Details unter Actions im Schritt „Einreichungen aus dem Postfach abholen“.\n' >> eingang/bericht.md
+          fi
           node scripts/vorschlag-pruefen.mjs HEAD
           npm run build
 
@@ -86,7 +92,8 @@ jobs:
           delete-branch: true
 
       - name: Abgeholte Mails als erledigt markieren
-        if: vars.POSTFACH_AKTIV == 'true' && steps.pr.outcome == 'success'
+        # Nur wenn wirklich ein Vorschlag entstanden ist (ohne Änderungen legt der vorige Schritt keinen an).
+        if: steps.postfach.outcome == 'success' && steps.pr.outputs.pull-request-number != ''
         run: python3 scripts/postfach-abholen.py erledigt
         env:
           IMAP_HOST: ${{ secrets.IMAP_HOST }}
