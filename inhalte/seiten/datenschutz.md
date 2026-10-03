@@ -29,4 +29,6 @@ Die auf dieser Website verwendeten Schriftarten sind auf unserem eigenen Server 
 
 #### Newsletter
 
-Der aktuell auf der Website angebotene Newsletter wird von Julia Junge via Brevo angeboten und verantwortet. Sehen Sie dazu Julias [Datenschutzerklärung](https://www.juliajunge.de/datenschutz/).
+Der aktuell auf der Website angebotene Newsletter wird von Julia Junge via Brevo angeboten und verantwortet.
+
+Auf der Startseite und der Seite „Newsletter“ ist das Anmeldeformular von Brevo (Newsletter-Dienst mit Sitz in Paris, Frankreich) eingebunden. Beim Aufruf dieser Seiten lädt Ihr Browser das Formular direkt von den Servern von Brevo. Dabei werden technisch notwendige Daten wie Ihre IP-Adresse an Brevo übertragen, auch wenn Sie das Formular nicht ausfüllen. Sehen Sie dazu Julias [Datenschutzerklärung](https://www.juliajunge.de/datenschutz/).
