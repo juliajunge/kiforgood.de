@@ -1,0 +1,136 @@
+name: KI-Korrektur per Kommentar
+
+# Ein Kommentar mit „@claude …“ in einem KI-Vorschlag (Pull Request) lässt Claude den Vorschlag
+# entsprechend ändern, z. B. „@claude Die Parisax-Termine sind am 21.10. und 9.12., bitte eintragen.“
+# Sicherheit:
+# - reagiert nur auf Kommentare von Mitwirkenden des Repos (nicht von Fremden)
+# - nur bei KI-Vorschlägen (Zweige „aktualisierung/…“)
+# - Claude selbst schreibt nicht in GitHub; ein fester Schritt übernimmt danach ausschließlich
+#   Termine und Wissenspool – und nur, wenn alle Prüfungen bestanden sind.
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: kommentar-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  korrektur:
+    if: >-
+      github.event.issue.pull_request &&
+      startsWith(github.event.comment.body, '@claude') &&
+      contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.comment.author_association)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Vorschlag bestimmen
+        id: pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NUMMER: ${{ github.event.issue.number }}
+        run: |
+          zweig=$(gh pr view "$NUMMER" --repo "$GITHUB_REPOSITORY" --json headRefName --jq .headRefName)
+          echo "zweig=$zweig" >> "$GITHUB_OUTPUT"
+          case "$zweig" in
+            aktualisierung/*) echo "KI-Vorschlag auf Zweig $zweig" ;;
+            *) echo "Kein KI-Vorschlag – Korrektur per Kommentar ist nur bei KI-Vorschlägen möglich."; exit 1 ;;
+          esac
+
+      - name: Bestätigen, dass es losgeht
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NUMMER: ${{ github.event.issue.number }}
+        run: gh pr comment "$NUMMER" --repo "$GITHUB_REPOSITORY" --body "👀 Ich arbeite an der Korrektur. Das dauert ein paar Minuten."
+
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.pr.outputs.zweig }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      - name: Auftrag aus dem Kommentar übernehmen
+        env:
+          KOMMENTAR: ${{ github.event.comment.body }}
+        run: |
+          mkdir -p eingang
+          printf '%s\n' "$KOMMENTAR" > eingang/auftrag.md
+
+      - name: Claude setzt die Korrektur um
+        id: claude
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          prompt: |
+            Ein Mitglied des KI-for-Good-Teams hat zu diesem Änderungsvorschlag eine Korrektur geschrieben.
+            Der Auftrag steht in eingang/auftrag.md. Setze ihn um.
+            Halte dich an CLAUDE.md. Für Termine gilt das Format in .claude/skills/termine-recherche/SKILL.md
+            (Abschnitte „Eintrag in inhalte/termine.md“ und „Nur Belegtes übernehmen“).
+            Ändere ausschließlich inhalte/termine.md oder inhalte/wissenspool.md.
+            Was im Auftrag steht, gilt als bestätigt – du musst es nicht erst im Netz nachprüfen. Fehlende
+            Angaben (z. B. Uhrzeit, Link) darfst du auf der Veranstaltungsseite nachschlagen.
+            Prüfe am Ende mit `npm run pruefen` und behebe gemeldete Fehler.
+            Schreibe zum Schluss eine kurze Antwort (2–5 Sätze, Deutsch) nach eingang/antwort.md:
+            was du geändert hast, und ggf. was du nicht umsetzen konntest und warum.
+          claude_args: >-
+            --allowedTools "Read,Glob,Grep,Edit,Write,WebSearch,WebFetch,Bash(npm run pruefen)"
+            --disallowedTools "Bash(git:*)"
+
+      - name: Zusammenfassung des KI-Laufs anzeigen
+        if: always()
+        run: node scripts/lauf-zusammenfassung.mjs "${{ steps.claude.outputs.execution_file }}"
+
+      - name: Schutzregeln und Daten prüfen
+        run: |
+          node scripts/vorschlag-pruefen.mjs HEAD --loeschen-erlaubt
+          npm run build
+
+      - name: Korrektur in den Vorschlag übernehmen
+        id: speichern
+        env:
+          ZWEIG: ${{ steps.pr.outputs.zweig }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- inhalte/termine.md inhalte/wissenspool.md
+          if git diff --cached --quiet; then
+            echo "geaendert=nein" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "Korrektur per Kommentar"
+            git push origin "HEAD:$ZWEIG"
+            echo "geaendert=ja" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Antwort im Vorschlag
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NUMMER: ${{ github.event.issue.number }}
+          ERGEBNIS: ${{ job.status }}
+          GEAENDERT: ${{ steps.speichern.outputs.geaendert }}
+          LAUF: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          {
+            if [ "$ERGEBNIS" = "success" ] && [ "$GEAENDERT" = "ja" ]; then
+              echo "✅ Korrektur übernommen – siehe „Files changed“."
+            elif [ "$ERGEBNIS" = "success" ]; then
+              echo "ℹ️ Keine Änderung an den Daten nötig oder möglich."
+            else
+              echo "❌ Die Korrektur konnte nicht übernommen werden. Am Vorschlag wurde nichts verändert. Details: $LAUF"
+            fi
+            echo
+            if [ -s eingang/antwort.md ]; then cat eingang/antwort.md; fi
+          } > eingang/kommentar.md
+          gh pr comment "$NUMMER" --repo "$GITHUB_REPOSITORY" --body-file eingang/kommentar.md

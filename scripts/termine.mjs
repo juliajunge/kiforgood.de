@@ -79,7 +79,8 @@ export function datumLesen(text) {
 
 /** Zerlegt die 📅-Zeile in Datum und die übrigen Angaben. */
 function zeileLesen(zeile) {
-  const teile = zeile.split("|").map((s) => s.trim()).filter(Boolean);
+  // „online“ ist bei uns der Normalfall und wird nie angezeigt
+  const teile = zeile.split("|").map((s) => s.trim()).filter((s) => s && !/^online$/i.test(s));
   const t = { zeile: teile.join(" | "), ...datumLesen(teile[0] || "") };
   for (const teil of teile.slice(1)) {
     if (/^kostenlos$/i.test(teil)) t.kostenlos = true;
