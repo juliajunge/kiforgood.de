@@ -95,12 +95,12 @@ mit Susanne
 CorrelAid
 [Deep Dive: Künstliche Intelligenz](https://correlaid.org/veranstaltungen/deepdive-ki-2026-02)
 mit CorrelAid
-📅 25. November, 2. und 9. Dezember 2026 | jeweils 9:00–15:30 Uhr | online
+📅 25. November, 2. und 9. Dezember 2026 | jeweils 9:00–15:30 Uhr
 
 Evang. Pop-Akademie
 [KI als kreativer Partner: Von der Idee zur Bühne](https://www.ev-pop-institut.de/artikel/ki-als-kreativer-partner-von-der-idee-zur-buehne)
 mit Brigitte
-📅 25. November & 2. Dezember 2026 | jeweils 18:30-21:00 Uhr | online
+📅 25. November & 2. Dezember 2026 | jeweils 18:30-21:00 Uhr
 
 Akademie für Ehrenamtlichkeit
 [Freiwilligenkoordination mit KI optimieren](https://www.ehrenamt.de/Seminare/Vertiefung_Engagementfoerderung/385_Freiwilligenkoordination_mit_KI_optimieren.htm)
