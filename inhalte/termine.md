@@ -48,7 +48,7 @@ mit Julia
 CorrelAid
 [KI aber ohne den Hype: Was kann KI abseits von generativer KI?](https://correlaid.org/veranstaltungen/cc26-ki-ohne-hype)
 mit CorrelAid
-📅 Mittwoch, 7. Oktober 2026 | 13:00–14:00 Uhr | online
+📅 Mittwoch, 7. Oktober 2026 | 13:00–14:00 Uhr
 
 Haus des Stiftens
 [KI-Kreativwerkstatt: Ideen, Texte & Posts mit Plan](https://www.hausdesstiftens.org/online-workshop/ki-kreativwerkstatt-ideen-texte-posts-mit-plan-3/)
