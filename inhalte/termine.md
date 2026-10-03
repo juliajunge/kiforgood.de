@@ -68,7 +68,7 @@ mit Julia
 SKala-CAMPUS
 [AI-OS: Dein persönliches Betriebssystem für die Zusammenarbeit mit KI](https://www.skala-campus.org/event/ai-os/)
 mit SKala-CAMPUS
-📅 Dienstag, 27. Oktober 2026 | 9:00–10:00 Uhr | online | kostenlos
+📅 Dienstag, 27. Oktober 2026 | 9:00–10:00 Uhr | kostenlos
 
 Haus des Stiftens
 [Wie Sie KI erfolgreich in Ihre Organisation einführen](https://www.hausdesstiftens.org/online-workshop/wie-sie-ki-erfolgreich-in-ihre-organisation-einfuehren/)
