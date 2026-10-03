@@ -23,9 +23,9 @@ Sie erhalten jederzeit Auskunft von mir, ob und welche Daten von Ihnen gespeiche
 
 Sie haben das Recht, eine Beschwerde bei der zuständigen Aufsichtsbehörde einzureichen.
 
-**Google Fonts**
+**Schriftarten**
 
-Wir nutzen auf dieser Website zur einheitlichen Darstellung und zum störungsfreien Betrieb als berechtigten Interessen nach Art 6 Abs. 1 lit f DS-GVO sogenannte GoogleFonts, d.h. Schriftarten von Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA. Damit die Seite Ihnen wie erwünscht angezeigt wird, muss Ihre IP-Adresse dazu an Google im Moment des Seitenaufrufes weitergeleitet werden, damit Google Ihrem Rechner die entsprechenden Schriftarten zur Verfügung stellen kann. Mehr Details finden Sie in der Datenschutzerklärung von Google [https://www.google.com/policies/privacy/](https://www.google.com/policies/privacy/), mögliche Opt-Out-Lösungen finden Sie hier: [https://adssettings.google.com/authenticated](https://adssettings.google.com/authenticated).
+Die auf dieser Website verwendeten Schriftarten sind auf unserem eigenen Server gespeichert und werden von dort geladen. Beim Aufruf der Seiten wird dafür keine Verbindung zu Google oder anderen Anbietern von Schriftarten aufgebaut. Ihre IP-Adresse wird dabei also nicht an Dritte übertragen.
 
 #### Newsletter
 

@@ -106,7 +106,7 @@ KI-generierte Texte und Bilder genießen **kein Urheberrecht**. Dennoch gibt es 
 
 ### Ethik
 
-![Logo Code of Conduct Demokratische KI](https://www.juliajunge.de/wp-content/uploads/image-9.png "rechts 491")
+![Logo Code of Conduct Demokratische KI](/wp-content/uploads/2026/10/logo-code-of-conduct-demokratische-ki.png "rechts 491")
 
 - Wir haben als Team bei KiforGood mitgezeichnet für den **Code of Conduct Demokratische KI**. Das ist Selbstverpflichtung von über 200 NGOs zu KI: [demokratische-ki.de/code-of-conduct](https://demokratische-ki.de/code-of-conduct/)
   **Absolute Empfehlung!**
