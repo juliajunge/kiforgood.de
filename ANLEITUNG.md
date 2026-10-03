@@ -165,7 +165,7 @@ siehe unten).
 | Was | Wo | Wert |
 |---|---|---|
 | Veröffentlichung einschalten | Settings → Pages → Source | **GitHub Actions** |
-| KI-Zugang | Settings → Secrets and variables → Actions → Secrets | `ANTHROPIC_API_KEY` |
+| KI-Zugang (Claude-Abo) | Settings → Secrets and variables → Actions → Secrets | `CLAUDE_CODE_OAUTH_TOKEN` – erzeugen mit `claude setup-token` (alternativ: API-Schlüssel als `ANTHROPIC_API_KEY`) |
 | Postfach (IMAP) | Secrets | `IMAP_HOST` (z. B. `mail.jpberlin.de`), `IMAP_BENUTZER`, `IMAP_PASSWORT` |
 | Erlaubte Absender\*innen | Secrets | `ERLAUBTE_ABSENDER`, z. B. `mail@juliajunge.de, @fairlinked.org` |
 | Postfach-Abruf einschalten | Variables | `POSTFACH_AKTIV` = `true` |
