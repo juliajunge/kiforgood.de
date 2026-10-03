@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="de-DE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ title }}</title>
+{%- if description %}
+<meta name="description" content="{{ description }}">
+{%- endif %}
+<link rel="stylesheet" href="/assets/css/seiten/{{ css }}.css">
+<link rel="stylesheet" href="/assets/css/eigene.css">
+<link rel="icon" href="/wp-content/uploads/2024/08/Drache-vor-Flipchart-DALL·E-2024-02-14-13.28.30-A-comic-style-illustration-depicting-a-playful-dragon-writing-_AI_-on-a-flipchart.-The-dragon-designed-with-simplified-cartoonish-features-holds-a--e1723644411611.webp">
+</head>
+<body class="{{ bodyclass }}">
+<a class="skip-link screen-reader-text" href="#wp--skip-link--target">Zum Inhalt springen</a>
+<div class="wp-site-blocks">
+{% include "partials/header.html" %}
+
+{{ content | safe }}
+
+{% include "partials/footer.html" %}
+</div>
+<script src="/assets/js/menu.js" defer></script>
+</body>
+</html>

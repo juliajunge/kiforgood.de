@@ -1,0 +1,85 @@
+name: Wöchentliches Update (KI-Vorschlag)
+
+# Claude recherchiert neue Termine und liest die Einreichungen aus dem Postfach.
+# Ergebnis ist IMMER nur ein Änderungsvorschlag (Pull Request), den ein Mensch annehmen muss.
+# Claude selbst hat keine Schreibrechte auf GitHub: Den Vorschlag erstellt erst der letzte Schritt,
+# und der übernimmt ausschließlich Änderungen an src/_data/termine.yaml.
+
+on:
+  schedule:
+    - cron: "0 5 * * 1" # montags gegen 7 Uhr
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: ki-vorschlag
+  cancel-in-progress: false
+
+jobs:
+  vorschlag:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      - name: Kalenderwoche bestimmen
+        id: kw
+        run: echo "name=$(TZ=Europe/Berlin date +%G-KW%V)" >> "$GITHUB_OUTPUT"
+
+      - name: Einreichungen aus dem Postfach abholen
+        if: vars.POSTFACH_AKTIV == 'true'
+        run: python3 scripts/postfach-abholen.py abholen
+        env:
+          IMAP_HOST: ${{ secrets.IMAP_HOST }}
+          IMAP_BENUTZER: ${{ secrets.IMAP_BENUTZER }}
+          IMAP_PASSWORT: ${{ secrets.IMAP_PASSWORT }}
+          ERLAUBTE_ABSENDER: ${{ secrets.ERLAUBTE_ABSENDER }}
+
+      - name: Claude recherchiert und ergänzt die Terminliste
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          prompt: |
+            Führe das wöchentliche Termine-Update für die Website KI for Good durch.
+            Halte dich genau an .claude/skills/termine-recherche/SKILL.md und an CLAUDE.md.
+            Einreichungen aus dem Postfach (falls vorhanden): eingang/einreichungen.md
+            Ändere ausschließlich src/_data/termine.yaml. Schreibe deinen Bericht nach eingang/bericht.md.
+          claude_args: >-
+            --allowedTools "Read,Glob,Grep,Edit(src/_data/termine.yaml),Write(eingang/bericht.md),WebSearch,WebFetch,Bash(npm run pruefen)"
+            --disallowedTools "Bash(git:*)"
+
+      - name: Schutzregeln und Daten prüfen
+        run: |
+          node scripts/vorschlag-pruefen.mjs origin/main
+          npm run build
+
+      - name: Vorschlag als Pull Request anlegen
+        id: pr
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: aktualisierung/termine-${{ steps.kw.outputs.name }}
+          add-paths: src/_data/termine.yaml
+          commit-message: "Termine: Vorschlag ${{ steps.kw.outputs.name }}"
+          title: "Termine-Update ${{ steps.kw.outputs.name }} (KI-Vorschlag)"
+          body-path: eingang/bericht.md
+          labels: ki-vorschlag
+          delete-branch: true
+
+      - name: Abgeholte Mails als erledigt markieren
+        if: vars.POSTFACH_AKTIV == 'true' && steps.pr.outcome == 'success'
+        run: python3 scripts/postfach-abholen.py erledigt
+        env:
+          IMAP_HOST: ${{ secrets.IMAP_HOST }}
+          IMAP_BENUTZER: ${{ secrets.IMAP_BENUTZER }}
+          IMAP_PASSWORT: ${{ secrets.IMAP_PASSWORT }}

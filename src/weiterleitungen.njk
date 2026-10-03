@@ -1,0 +1,18 @@
+---
+pagination:
+  data: weiterleitungen
+  size: 1
+  alias: alt
+permalink: "{{ alt }}"
+eleventyExcludeFromCollections: true
+---
+<!DOCTYPE html>
+<html lang="de-DE">
+<head>
+<meta charset="UTF-8">
+<title>Weiterleitung</title>
+<meta http-equiv="refresh" content="0; url={{ weiterleitungen[alt] }}">
+<link rel="canonical" href="{{ weiterleitungen[alt] }}">
+</head>
+<body><p>Diese Seite ist umgezogen: <a href="{{ weiterleitungen[alt] }}">{{ weiterleitungen[alt] }}</a></p></body>
+</html>

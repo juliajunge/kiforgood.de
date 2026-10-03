@@ -1,0 +1,75 @@
+name: Monatliche Linkprüfung
+
+# 1. Ein Linkchecker (lychee) prüft alle Links der gebauten Website.
+# 2. Für kaputte Links im Wissenspool sucht Claude Ersatz und schlägt ihn als Pull Request vor.
+# 3. Kaputte Links auf den übrigen Seiten werden im Bericht aufgeführt und von Hand korrigiert.
+
+on:
+  schedule:
+    - cron: "0 5 1 * *" # am 1. jedes Monats gegen 7 Uhr
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci && npm run build
+
+      - name: Monat bestimmen
+        id: monat
+        run: echo "name=$(TZ=Europe/Berlin date +%Y-%m)" >> "$GITHUB_OUTPUT"
+
+      - name: Alle externen Links prüfen
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress --max-concurrency 4 --timeout 30 --max-retries 2
+            --scheme https --scheme http
+            --accept 200..=299,403,429
+            --exclude "linkedin\.com"
+            "_site/**/*.html"
+          output: eingang/linkpruefung.md
+          fail: false
+
+      - name: Claude sucht Ersatz für kaputte Links im Wissenspool
+        if: hashFiles('eingang/linkpruefung.md') != ''
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          prompt: |
+            Führe die monatliche Linkpflege für die Website KI for Good durch.
+            Halte dich genau an .claude/skills/links-pflegen/SKILL.md und an CLAUDE.md.
+            Ergebnis des Linkcheckers: eingang/linkpruefung.md
+            Ändere ausschließlich src/_data/wissenspool.yaml. Schreibe deinen Bericht nach eingang/bericht.md.
+          claude_args: >-
+            --allowedTools "Read,Glob,Grep,Edit(src/_data/wissenspool.yaml),Write(eingang/bericht.md),WebSearch,WebFetch,Bash(npm run pruefen)"
+            --disallowedTools "Bash(git:*)"
+
+      - name: Schutzregeln und Daten prüfen
+        run: |
+          node scripts/vorschlag-pruefen.mjs origin/main
+          npm run build
+
+      - name: Vorschlag als Pull Request anlegen
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: aktualisierung/links-${{ steps.monat.outputs.name }}
+          add-paths: src/_data/wissenspool.yaml
+          commit-message: "Wissenspool: Linkpflege ${{ steps.monat.outputs.name }}"
+          title: "Linkpflege ${{ steps.monat.outputs.name }} (KI-Vorschlag)"
+          body-path: eingang/bericht.md
+          labels: ki-vorschlag
+          delete-branch: true

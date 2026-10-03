@@ -1,0 +1,7 @@
+/* Eigene Ergänzungen zum übernommenen WordPress-Layout. */
+
+/* Platz rechts im Kopfbereich, seit die WordPress-Suche entfallen ist */
+.wp-block-navigation__responsive-container-open { cursor: pointer; }
+
+/* Abgerundete Ecken für Bilder im Wissenspool (wie im WordPress-Original) */
+.wp-block-image.is-style-rounded.ki-abgerundet img { border-radius: var(--wp--preset--spacing--20); }

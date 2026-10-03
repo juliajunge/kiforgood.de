@@ -1,0 +1,99 @@
+# Konfiguration für den Web-Editor „Pages CMS“ (https://pagescms.org)
+# Damit lassen sich Termine, Wissenspool und Texte im Browser bearbeiten – ohne Git-Kenntnisse.
+
+media:
+  input: src/wp-content/uploads
+  output: /wp-content/uploads
+
+content:
+  - name: termine
+    label: Termine (Workshops)
+    type: file
+    path: src/_data/termine.yaml
+    format: yaml
+    fields:
+      - name: termine
+        label: Termine
+        type: object
+        list: true
+        description: Vergangene Termine verschwinden automatisch von der Website. Reihenfolge egal – die Seite sortiert selbst.
+        fields:
+          - { name: anbieter, label: Anbieter/Organisation, type: string, required: true }
+          - { name: titel, label: Titel der Veranstaltung, type: string, required: true }
+          - { name: url, label: Link zur Veranstaltung, type: string, required: true }
+          - { name: mit, label: "Trainer*innen (ohne „mit“)", type: string }
+          - { name: datum, label: Datum (erster Termin), type: date, required: true }
+          - { name: bis, label: "Letzter Termin (nur bei mehrteiligen Kursen)", type: date }
+          - { name: datum_text, label: "Eigene Datumsangabe (nur bei mehrteiligen Kursen, z. B. „20. Oktober bis 10. November 2026“)", type: string }
+          - { name: zeit, label: "Uhrzeit (z. B. „9:00–10:00 Uhr“)", type: string }
+          - { name: ort, label: "Ort (z. B. „online“)", type: string }
+          - { name: kostenlos, label: kostenlos, type: boolean }
+          - { name: anmeldeschluss, label: "Anmeldeschluss (z. B. „12. November“)", type: string }
+      - name: dauerangebote
+        label: Dauerhafte Angebote (ohne festen Termin)
+        type: object
+        list: true
+        fields:
+          - { name: rubrik, label: "Überschrift links (z. B. „online-Selbstlernkurs“)", type: string, required: true }
+          - { name: hinweis, label: Hinweis (kursiv), type: string }
+          - { name: titel, label: Titel, type: string, required: true }
+          - { name: url, label: Link, type: string, required: true }
+          - { name: mit, label: "Trainer*innen", type: string }
+          - { name: beschreibung, label: Beschreibung, type: text }
+
+  - name: wissenspool
+    label: Wissenspool
+    type: file
+    path: src/_data/wissenspool.yaml
+    format: yaml
+    fields:
+      - name: favoriten
+        label: Unsere Favoriten (Kacheln oben)
+        type: object
+        list: true
+        fields:
+          - { name: bild, label: Bild, type: image, required: true }
+          - { name: bild_alt, label: Bildbeschreibung (für Screenreader), type: string }
+          - { name: text, label: Text auf dem Knopf, type: string, required: true }
+          - { name: url, label: Link, type: string, required: true }
+          - { name: bild_url, label: Link beim Klick aufs Bild (optional), type: string }
+      - name: bereiche
+        label: Bereiche
+        type: object
+        list: true
+        fields:
+          - { name: titel, label: Überschrift, type: string, required: true }
+          - { name: bild, label: Bild unter dem Bereich (optional), type: image }
+          - name: eintraege
+            label: Einträge
+            type: object
+            list: true
+            fields: &eintrag
+              - { name: icon, label: "Symbol (z. B. 📋 🎓 🎬 🎧 ✉️)", type: string }
+              - { name: titel, label: Linktext, type: string }
+              - { name: url, label: Link, type: string }
+              - { name: zusatz, label: "Zusatz nach dem Link (fett, Links als [Text](https://…))", type: string }
+              - { name: text, label: "Beschreibung (Links als [Text](https://…))", type: text }
+          - name: gruppen
+            label: Unterüberschriften mit Einträgen (optional)
+            type: object
+            list: true
+            fields:
+              - { name: titel, label: Unterüberschrift, type: string }
+              - { name: ebene, label: "Größe (3 = größer, 4 = kleiner)", type: number }
+              - { name: eintraege, label: Einträge, type: object, list: true, fields: *eintrag }
+
+  - name: seiten
+    label: Seiten (HTML – nur mit Vorsicht ändern)
+    type: collection
+    path: src/seiten
+    extension: html
+    view:
+      fields: [title, permalink]
+    fields:
+      - { name: title, label: Seitentitel (Browser-Tab), type: string }
+      - { name: description, label: Beschreibung für Suchmaschinen, type: text }
+      - { name: permalink, label: Adresse (nicht ändern), type: string, readonly: true }
+      - { name: bodyclass, label: Technisch (nicht ändern), type: string, hidden: true }
+      - { name: css, label: Technisch (nicht ändern), type: string, hidden: true }
+      - { name: body, label: Inhalt (HTML), type: code, options: { language: html } }

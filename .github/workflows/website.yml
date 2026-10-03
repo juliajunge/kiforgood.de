@@ -1,0 +1,59 @@
+name: Website prüfen und veröffentlichen
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "15 3 * * *" # täglich gegen 5 Uhr: vergangene Termine verschwinden automatisch
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: website-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  bauen:
+    name: Daten prüfen und Website bauen
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      - name: KI-Vorschläge dürfen nur Termine und Wissenspool ändern
+        if: github.event_name == 'pull_request' && startsWith(github.head_ref, 'aktualisierung/')
+        run: node scripts/vorschlag-pruefen.mjs origin/${{ github.base_ref }}
+
+      - name: Daten prüfen, Website bauen, Ergebnis prüfen
+        run: npm run build
+        env:
+          PATH_PREFIX: /${{ github.event.repository.name }}/
+
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request'
+        with:
+          path: _site
+
+  veroeffentlichen:
+    name: Auf GitHub Pages veröffentlichen
+    needs: bauen
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.veroeffentlichung.outputs.page_url }}
+    steps:
+      - id: veroeffentlichung
+        uses: actions/deploy-pages@v4

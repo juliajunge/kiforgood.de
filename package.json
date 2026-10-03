@@ -1,0 +1,19 @@
+{
+  "name": "kiforgood-website",
+  "private": true,
+  "description": "Website KI for Good – statische Seite, gebaut mit Eleventy",
+  "type": "module",
+  "scripts": {
+    "pruefen": "node scripts/daten-pruefen.mjs",
+    "build": "npm run pruefen && eleventy && node scripts/ergebnis-pruefen.mjs",
+    "start": "eleventy --serve"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "3.1.6",
+    "js-yaml": "5.4.2",
+    "markdown-it": "15.0.2"
+  }
+}
