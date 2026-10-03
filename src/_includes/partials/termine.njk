@@ -1,4 +1,4 @@
-{#- Termine-Liste der Seite /workshops/. Daten: src/_data/termine.yaml -#}
+{#- Termine-Liste der Seite /workshops/. Daten: inhalte/termine.md -#}
 {%- set spalten = "wp-block-columns is-layout-flex wp-container-core-columns-is-layout-3a88641f wp-block-columns-is-layout-flex" -%}
 {%- set spalte = "wp-block-column is-layout-flow wp-block-column-is-layout-flow" -%}
 
@@ -11,7 +11,7 @@
 </div>
 <div class="{{ spalte }}" style="flex-basis:66.66%">
 {%- for t in monat.termine %}
-<p class="wp-block-paragraph"><em>{{ t.anbieter }}</em><br><a href="{{ t.url }}" target="_blank" rel="noreferrer noopener"><strong>{{ t.titel }}</strong></a><br>{% if t.mit %}<em>mit {{ t.mit }}</em><br>{% endif %}📅 {{ t | terminZeile }}<br><a href="{{ t.url }}" target="_blank" rel="noreferrer noopener">Mehr Infos</a></p>
+<p class="wp-block-paragraph"><em>{{ t.anbieter }}</em><br><a href="{{ t.url }}" target="_blank" rel="noreferrer noopener"><strong>{{ t.titel }}</strong></a><br>{% if t.mit %}<em>mit {{ t.mit }}</em><br>{% endif %}📅 {{ t.zeile }}<br><a href="{{ t.url }}" target="_blank" rel="noreferrer noopener">Mehr Infos</a></p>
 {%- if not loop.last %}
 <p class="wp-block-paragraph"></p>
 {%- endif %}

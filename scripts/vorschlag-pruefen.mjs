@@ -1,12 +1,12 @@
-// Schutzregel für KI-Vorschläge: Ein automatischer Vorschlag darf nur die Datenlisten ändern
+// Schutzregel für KI-Vorschläge: Ein automatischer Vorschlag darf nur Termine und Wissenspool ändern
 // und keine kommenden Termine oder ganze Wissenspool-Bereiche löschen.
 // Aufruf: node scripts/vorschlag-pruefen.mjs <Vergleichsstand, z. B. origin/main>
 import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { load } from "js-yaml";
-import { aktuelleTermine, heuteInBerlin } from "./termine.mjs";
+import { aktuelleTermine, heuteInBerlin, termineLesen } from "./termine.mjs";
 
-const ERLAUBT = ["src/_data/termine.yaml", "src/_data/wissenspool.yaml"];
+const ERLAUBT = ["inhalte/termine.md", "src/_data/wissenspool.yaml"];
 const basis = process.argv[2] || "origin/main";
 const git = (...args) => execFileSync("git", args, { encoding: "utf8" });
 const fehler = [];
@@ -26,9 +26,12 @@ const neu = (pfad) => {
 };
 
 const heute = heuteInBerlin();
-const schluessel = (t) => `${t.url}|${String(t.datum instanceof Date ? t.datum.toISOString().slice(0, 10) : t.datum)}`;
-const neueTermine = new Set((neu("src/_data/termine.yaml").termine || []).map(schluessel));
-for (const t of aktuelleTermine(alt("src/_data/termine.yaml").termine || [], heute))
+const altText = (pfad) => { try { return git("show", `${basis}:${pfad}`); } catch { return ""; } };
+const schluessel = (t) => `${t.url}|${t.datum}`;
+const termineNeu = termineLesen(readFileSync("inhalte/termine.md", "utf8"));
+fehler.push(...termineNeu.fehler.map((f) => "termine.md › " + f));
+const neueTermine = new Set(termineNeu.termine.map(schluessel));
+for (const t of aktuelleTermine(termineLesen(altText("inhalte/termine.md")).termine, heute))
   if (!neueTermine.has(schluessel(t))) fehler.push(`Kommender Termin wurde gelöscht oder verändert: „${t.titel}“ (${schluessel(t)}). Das darf nur ein Mensch.`);
 
 const poolAlt = alt("src/_data/wissenspool.yaml"), poolNeu = neu("src/_data/wissenspool.yaml");

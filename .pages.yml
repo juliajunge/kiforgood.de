@@ -9,37 +9,15 @@ content:
   - name: termine
     label: Termine (Workshops)
     type: file
-    path: src/_data/termine.yaml
-    format: yaml
+    path: inhalte/termine.md
+    format: yaml-frontmatter
     fields:
-      - name: termine
-        label: Termine
-        type: object
-        list: true
-        description: Vergangene Termine verschwinden automatisch von der Website. Reihenfolge egal – die Seite sortiert selbst.
-        fields:
-          - { name: anbieter, label: Anbieter/Organisation, type: string, required: true }
-          - { name: titel, label: Titel der Veranstaltung, type: string, required: true }
-          - { name: url, label: Link zur Veranstaltung, type: string, required: true }
-          - { name: mit, label: "Trainer*innen (ohne „mit“)", type: string }
-          - { name: datum, label: Datum (erster Termin), type: date, required: true }
-          - { name: bis, label: "Letzter Termin (nur bei mehrteiligen Kursen)", type: date }
-          - { name: datum_text, label: "Eigene Datumsangabe (nur bei mehrteiligen Kursen, z. B. „20. Oktober bis 10. November 2026“)", type: string }
-          - { name: zeit, label: "Uhrzeit (z. B. „9:00–10:00 Uhr“)", type: string }
-          - { name: ort, label: "Ort (z. B. „online“)", type: string }
-          - { name: kostenlos, label: kostenlos, type: boolean }
-          - { name: anmeldeschluss, label: "Anmeldeschluss (z. B. „12. November“)", type: string }
-      - name: dauerangebote
-        label: Dauerhafte Angebote (ohne festen Termin)
-        type: object
-        list: true
-        fields:
-          - { name: rubrik, label: "Überschrift links (z. B. „online-Selbstlernkurs“)", type: string, required: true }
-          - { name: hinweis, label: Hinweis (kursiv), type: string }
-          - { name: titel, label: Titel, type: string, required: true }
-          - { name: url, label: Link, type: string, required: true }
-          - { name: mit, label: "Trainer*innen", type: string }
-          - { name: beschreibung, label: Beschreibung, type: text }
+      - name: body
+        label: Termine – so geschrieben, wie sie auf der Website erscheinen
+        description: Einfach einen vorhandenen Termin kopieren und anpassen. Zwischen zwei Terminen eine Leerzeile. Die Erklärung steht ganz oben in der Datei.
+        type: code
+        options:
+          language: markdown
 
   - name: wissenspool
     label: Wissenspool

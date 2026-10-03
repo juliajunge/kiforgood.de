@@ -1,15 +1,13 @@
-// Prüft die Datenlisten (Termine, Wissenspool) vor jedem Build.
+// Prüft Termine (inhalte/termine.md) und Wissenspool (src/_data/wissenspool.yaml) vor jedem Build.
 // Bei einem Fehler bricht der Build ab – dann geht nichts online und die bisherige Seite bleibt bestehen.
 import { readFileSync, existsSync } from "node:fs";
 import { load } from "js-yaml";
-import { alsText } from "./termine.mjs";
+import { termineLesen } from "./termine.mjs";
 
 const fehler = [];
 const hinweise = [];
 const datei = (pfad) => load(readFileSync(new URL("../" + pfad, import.meta.url), "utf8"));
 
-const istDatum = (d) => /^\d{4}-\d{2}-\d{2}$/.test(d) && !isNaN(new Date(d + "T00:00:00Z")) &&
-  new Date(d + "T00:00:00Z").toISOString().startsWith(d);
 const istUrl = (u) => typeof u === "string" && (/^https?:\/\/[^\s]+$/.test(u) || /^\/[^\s]*$/.test(u));
 const bildDa = (b) => !b || /^https?:/.test(b) || existsSync(new URL("../src" + decodeURI(b), import.meta.url));
 
@@ -20,35 +18,29 @@ function felderPruefen(obj, wo, erlaubt, pflicht) {
   for (const [f, w] of Object.entries(obj)) if (typeof w === "string" && /\d\s*€|€\s*\d|EUR\s*\d/.test(w)) fehler.push(`${wo}: Feld „${f}“ enthält einen Preis – Preise werden nicht veröffentlicht (nur „kostenlos“).`);
 }
 
-// ---------- Termine ----------
-const termine = datei("src/_data/termine.yaml") || {};
-(termine.dauerangebote || []).forEach((d, i) => {
-  const wo = `termine.yaml › dauerangebote › Nr. ${i + 1} („${d?.titel ?? "?"}“)`;
-  felderPruefen(d, wo, ["rubrik", "hinweis", "titel", "url", "mit", "beschreibung"], ["rubrik", "titel", "url"]);
-  if (d?.url && !istUrl(d.url)) fehler.push(`${wo}: „url“ ist kein gültiger Link.`);
+// ---------- Termine (inhalte/termine.md) ----------
+const termineText = readFileSync(new URL("../inhalte/termine.md", import.meta.url), "utf8");
+const termine = termineLesen(termineText);
+fehler.push(...termine.fehler.map((f) => "termine.md › " + f));
+hinweise.push(...termine.hinweise.map((h) => "termine.md › " + h));
+const PREIS = /\d\s*€|€\s*\d|EUR\s*\d/;
+termineText.replace(/<!--[\s\S]*?-->/g, (k) => k.replace(/[^\n]/g, "")).split(/\r?\n/).forEach((z, i) => {
+  if (PREIS.test(z)) fehler.push(`termine.md › Zeile ${i + 1}: enthält einen Preis – Preise werden nicht veröffentlicht (nur „kostenlos“).`);
 });
-if (!Array.isArray(termine.termine)) fehler.push("termine.yaml: Die Liste „termine:“ fehlt.");
+for (const d of termine.dauerangebote)
+  if (d.url && !istUrl(d.url)) fehler.push(`termine.md › Zeile ${d.nr} („${d.rubrik}“): Der Link ist ungültig: ${d.url}`);
 const gesehen = new Map();
-(termine.termine || []).forEach((t, i) => {
-  const wo = `termine.yaml › termine › Nr. ${i + 1} („${t?.titel ?? "?"}“)`;
-  felderPruefen(t, wo,
-    ["anbieter", "titel", "url", "mit", "datum", "bis", "datum_text", "zeit", "ort", "kostenlos", "anmeldeschluss", "zusatz", "notiz"],
-    ["anbieter", "titel", "url", "datum"]);
-  if (!t) return;
-  const datum = alsText(t.datum), bis = alsText(t.bis);
-  if (t.datum != null && !istDatum(datum)) fehler.push(`${wo}: „datum“ muss so aussehen: 2026-10-06 (ist: ${datum}).`);
-  if (t.bis != null && !istDatum(bis)) fehler.push(`${wo}: „bis“ muss so aussehen: 2026-11-10 (ist: ${bis}).`);
-  if (istDatum(datum) && istDatum(bis) && bis < datum) fehler.push(`${wo}: „bis“ liegt vor „datum“.`);
-  if (t.url && !istUrl(t.url)) fehler.push(`${wo}: „url“ ist kein gültiger Link.`);
-  if (t.kostenlos != null && typeof t.kostenlos !== "boolean") fehler.push(`${wo}: „kostenlos“ muss true oder false sein.`);
-  const schluessel = `${t.url}|${datum}`;
-  if (gesehen.has(schluessel)) fehler.push(`${wo}: Doppelter Eintrag (gleicher Link und gleiches Datum wie Nr. ${gesehen.get(schluessel)}).`);
-  gesehen.set(schluessel, i + 1);
-});
+for (const t of termine.termine) {
+  const wo = `termine.md › Zeile ${t.nr} („${t.titel}“)`;
+  if (!istUrl(t.url)) fehler.push(`${wo}: Der Link ist ungültig: ${t.url}`);
+  const schluessel = `${t.url}|${t.datum}`;
+  if (gesehen.has(schluessel)) fehler.push(`${wo}: Doppelter Termin (gleicher Link und gleiches Datum wie in Zeile ${gesehen.get(schluessel)}).`);
+  gesehen.set(schluessel, t.nr);
+}
 const proUrl = {};
-for (const t of termine.termine || []) (proUrl[t?.url] ||= []).push(alsText(t?.datum));
-for (const [url, daten] of Object.entries(proUrl))
-  if (daten.length > 1) hinweise.push(`Gleicher Link bei mehreren Terminen (${daten.join(", ")}): ${url} – bitte prüfen, ob das Absicht ist.`);
+for (const t of termine.termine) (proUrl[t.url] ||= []).push(`Zeile ${t.nr}`);
+for (const [url, stellen] of Object.entries(proUrl))
+  if (stellen.length > 1) hinweise.push(`termine.md › Gleicher Link bei mehreren Terminen (${stellen.join(", ")}): ${url} – bitte prüfen, ob das Absicht ist.`);
 
 // ---------- Wissenspool ----------
 const pool = datei("src/_data/wissenspool.yaml") || {};

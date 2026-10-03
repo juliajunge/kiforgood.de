@@ -1,6 +1,6 @@
 ---
 name: termine-recherche
-description: Recherchiert kommende KI-Workshops, Webinare, Weiterbildungen und Lernreisen für NGOs und den gemeinnützigen Sektor und trägt bestätigte Termine als Vorschlag in src/_data/termine.yaml ein. Nutzen beim wöchentlichen Termine-Update und wenn neue Veranstaltungshinweise (z. B. aus dem Postfach) eingepflegt werden sollen.
+description: Recherchiert kommende KI-Workshops, Webinare, Weiterbildungen und Lernreisen für NGOs und den gemeinnützigen Sektor und trägt bestätigte Termine als Vorschlag in inhalte/termine.md ein. Nutzen beim wöchentlichen Termine-Update und wenn neue Veranstaltungshinweise (z. B. aus dem Postfach) eingepflegt werden sollen.
 ---
 
 # KI-Workshops für NGOs recherchieren und eintragen
@@ -9,17 +9,17 @@ description: Recherchiert kommende KI-Workshops, Webinare, Weiterbildungen und L
 
 Finde kommende Workshops, Webinare, Weiterbildungen und Lernreisen rund um KI, die für NGOs,
 Non-Profits, gemeinnützige Organisationen, Ehrenamt oder den sozialen Sektor relevant sind, und trage
-bestätigte Termine in `src/_data/termine.yaml` ein. Dein Ergebnis ist ein **Vorschlag**, den ein
+bestätigte Termine in `inhalte/termine.md` ein. Dein Ergebnis ist ein **Vorschlag**, den ein
 Mensch prüft und annimmt.
 
 ## Was du darfst – und was nicht
 
-- Du änderst **nur** `src/_data/termine.yaml` und schreibst einen Bericht nach `eingang/bericht.md`.
+- Du änderst **nur** `inhalte/termine.md` und schreibst einen Bericht nach `eingang/bericht.md`.
 - Du **ergänzt** neue Termine. Bestehende kommende Termine löschst oder veränderst du nicht.
   (Vergangene Termine blendet die Website selbst aus – darum musst du dich nicht kümmern.)
 - Fällt dir bei einem bestehenden Termin ein Fehler auf (z. B. Datum geändert, abgesagt), änderst du
   ihn nicht, sondern schreibst es in den Bericht unter „Bitte prüfen“.
-- Du nimmst keine Preise auf (z. B. „85 €“). Nur `kostenlos: true`, wenn das zutrifft.
+- Du nimmst keine Preise auf (z. B. „85 €“). Nur „kostenlos“, wenn das zutrifft.
 
 ## Quellen
 
@@ -83,39 +83,41 @@ sondern führe ihn im Bericht unter „Bitte prüfen“ auf.
 
 ## Vor dem Eintragen prüfen
 
-- Ist der Termin schon in `termine.yaml`? (gleicher Link oder gleicher Titel + Datum) → keine Dublette.
+- Ist der Termin schon in `inhalte/termine.md`? (gleicher Link oder gleicher Titel + Datum) → keine Dublette.
 - Anbieter, vollständiger Titel, Trainer*innen, Datum, Uhrzeit, online/Ort, kostenlos?, Anmeldeschluss?
 - Direkter Link zur konkreten Veranstaltung.
 
-## Eintrag in termine.yaml
+## Eintrag in inhalte/termine.md
 
-Füge neue Termine in die Liste `termine:` ein. Die Reihenfolge ist egal – die Website sortiert selbst
-und erzeugt die Monatsüberschriften und die 📅-Zeile. Felder:
+Die Datei ist so geschrieben, wie die Termine auf der Website erscheinen. Jeder Termin ist ein Block aus
+drei oder vier Zeilen, zwischen zwei Terminen steht eine Leerzeile:
 
-```yaml
-- anbieter: SKala-CAMPUS                  # Pflicht
-  titel: KI-Anwendungen & Tools für den Arbeitsalltag   # Pflicht
-  url: https://www.skala-campus.org/event/...           # Pflicht, direkte Veranstaltungsseite
-  mit: Karin Siepmann                     # Trainer*innen (ohne „mit“)
-  datum: 2026-08-20                       # Pflicht, Format JJJJ-MM-TT (erster Termin)
-  zeit: 9:00–10:00 Uhr
-  ort: online                             # oder Stadt
-  kostenlos: true                         # nur wenn zutreffend
-  anmeldeschluss: 12. November            # nur wenn relevant
+```
+SKala-CAMPUS
+[KI-Anwendungen & Tools für den Arbeitsalltag](https://www.skala-campus.org/event/...)
+mit Karin Siepmann
+📅 Donnerstag, 20. August 2026 | 9:00–10:00 Uhr | online | kostenlos
 ```
 
-Mehrteilige Kurse oder Lernreisen:
+1. Zeile: Anbieter/Organisation
+2. Zeile: `[Titel](direkter Link zur Veranstaltung)`
+3. Zeile: `mit …` – Trainer*innen (weglassen, wenn unbekannt). Trainer*innen von KI for Good werden
+   wie bisher mit Vornamen genannt (`mit Julia`).
+4. Zeile: `📅 ` + Datum mit Wochentag und Jahreszahl, danach mit ` | ` getrennt, was zutrifft:
+   Uhrzeit, Ort (z. B. `online`), `kostenlos`, `Anmeldeschluss: 12. November`.
+   Diese Zeile erscheint wörtlich auf der Website.
 
-```yaml
-  datum: 2026-10-20                       # erster Termin
-  bis: 2026-11-10                         # letzter Termin – so lange bleibt der Eintrag sichtbar
-  datum_text: 20. Oktober bis 10. November 2026          # ersetzt die automatische Datumsangabe
-  zeit: 4 Termine, dienstags 10:00–13:00 Uhr
-```
+Mehrteilige Kurse oder Lernreisen: Datum als Zeitraum oder Aufzählung, z. B.
+`📅 20. Oktober bis 10. November 2026 | 4 Termine, dienstags 10:00–13:00 Uhr` oder
+`📅 25. November, 2. und 9. Dezember 2026 | jeweils 9:00–15:30 Uhr | online`.
+Der Eintrag bleibt dann bis zum letzten genannten Tag sichtbar.
 
-Trainer*innen von KI for Good werden wie bisher mit Vornamen genannt (`mit: Julia`).
+Füge neue Termine unter der passenden Monatsüberschrift ein (`## November 2026`), chronologisch.
+Fehlt die Überschrift, lege sie an. Ändere nichts an der Erklärung am Anfang der Datei
+(`<!-- … -->`) und nichts am Abschnitt `## Dauerhafte Angebote`.
 
 Prüfe danach mit `npm run pruefen`, dass die Datei gültig ist, und behebe gemeldete Fehler.
+Die Prüfung kontrolliert unter anderem, ob der Wochentag zum Datum passt.
 
 ## Bericht (eingang/bericht.md)
 

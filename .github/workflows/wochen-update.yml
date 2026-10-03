@@ -3,7 +3,7 @@ name: Wöchentliches Update (KI-Vorschlag)
 # Claude recherchiert neue Termine und liest die Einreichungen aus dem Postfach.
 # Ergebnis ist IMMER nur ein Änderungsvorschlag (Pull Request), den ein Mensch annehmen muss.
 # Claude selbst hat keine Schreibrechte auf GitHub: Den Vorschlag erstellt erst der letzte Schritt,
-# und der übernimmt ausschließlich Änderungen an src/_data/termine.yaml.
+# und der übernimmt ausschließlich Änderungen an inhalte/termine.md.
 
 on:
   schedule:
@@ -54,9 +54,9 @@ jobs:
             Führe das wöchentliche Termine-Update für die Website KI for Good durch.
             Halte dich genau an .claude/skills/termine-recherche/SKILL.md und an CLAUDE.md.
             Einreichungen aus dem Postfach (falls vorhanden): eingang/einreichungen.md
-            Ändere ausschließlich src/_data/termine.yaml. Schreibe deinen Bericht nach eingang/bericht.md.
+            Ändere ausschließlich inhalte/termine.md. Schreibe deinen Bericht nach eingang/bericht.md.
           claude_args: >-
-            --allowedTools "Read,Glob,Grep,Edit(src/_data/termine.yaml),Write(eingang/bericht.md),WebSearch,WebFetch,Bash(npm run pruefen)"
+            --allowedTools "Read,Glob,Grep,Edit(inhalte/termine.md),Write(eingang/bericht.md),WebSearch,WebFetch,Bash(npm run pruefen)"
             --disallowedTools "Bash(git:*)"
 
       - name: Schutzregeln und Daten prüfen
@@ -69,7 +69,7 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           branch: aktualisierung/termine-${{ steps.kw.outputs.name }}
-          add-paths: src/_data/termine.yaml
+          add-paths: inhalte/termine.md
           commit-message: "Termine: Vorschlag ${{ steps.kw.outputs.name }}"
           title: "Termine-Update ${{ steps.kw.outputs.name }} (KI-Vorschlag)"
           body-path: eingang/bericht.md
