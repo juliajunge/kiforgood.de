@@ -20,7 +20,10 @@ const geaendert = new Set([
 for (const d of geaendert) if (!ERLAUBT.includes(d)) fehler.push(`Datei darf von der KI nicht geändert werden: ${d}`);
 
 const alt = (pfad) => { try { return load(git("show", `${basis}:${pfad}`)) || {}; } catch { return {}; } };
-const neu = (pfad) => load(readFileSync(pfad, "utf8")) || {};
+const neu = (pfad) => {
+  try { return load(readFileSync(pfad, "utf8")) || {}; }
+  catch (e) { fehler.push(`${pfad} ist keine gültige YAML-Datei: ${e.reason} (Zeile ${e.mark?.line + 1})`); return {}; }
+};
 
 const heute = heuteInBerlin();
 const schluessel = (t) => `${t.url}|${String(t.datum instanceof Date ? t.datum.toISOString().slice(0, 10) : t.datum)}`;
