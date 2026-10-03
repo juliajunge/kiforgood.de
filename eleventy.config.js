@@ -1,4 +1,3 @@
-import { load as yamlLaden } from "js-yaml";
 import markdownIt from "markdown-it";
 import { HtmlBasePlugin } from "@11ty/eleventy";
 import { aktuelleTermine, nachMonat, heuteInBerlin } from "./scripts/termine.mjs";
@@ -16,7 +15,6 @@ md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
 };
 
 export default function (eleventyConfig) {
-  eleventyConfig.addDataExtension("yaml", (inhalt) => yamlLaden(inhalt));
   eleventyConfig.addWatchTarget("inhalte/");
   eleventyConfig.addPassthroughCopy({ "src/wp-content": "wp-content", "src/assets": "assets" });
   eleventyConfig.addPlugin(HtmlBasePlugin);

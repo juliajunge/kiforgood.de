@@ -3,10 +3,10 @@
 // Aufruf: node scripts/vorschlag-pruefen.mjs <Vergleichsstand, z. B. origin/main>
 import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
-import { load } from "js-yaml";
 import { aktuelleTermine, heuteInBerlin, termineLesen } from "./termine.mjs";
+import { wissenspoolLesen, alleEintraege } from "./wissenspool.mjs";
 
-const ERLAUBT = ["inhalte/termine.md", "src/_data/wissenspool.yaml"];
+const ERLAUBT = ["inhalte/termine.md", "inhalte/wissenspool.md"];
 const basis = process.argv[2] || "origin/main";
 const git = (...args) => execFileSync("git", args, { encoding: "utf8" });
 const fehler = [];
@@ -19,12 +19,6 @@ const geaendert = new Set([
 ].filter(Boolean));
 for (const d of geaendert) if (!ERLAUBT.includes(d)) fehler.push(`Datei darf von der KI nicht geändert werden: ${d}`);
 
-const alt = (pfad) => { try { return load(git("show", `${basis}:${pfad}`)) || {}; } catch { return {}; } };
-const neu = (pfad) => {
-  try { return load(readFileSync(pfad, "utf8")) || {}; }
-  catch (e) { fehler.push(`${pfad} ist keine gültige YAML-Datei: ${e.reason} (Zeile ${e.mark?.line + 1})`); return {}; }
-};
-
 const heute = heuteInBerlin();
 const altText = (pfad) => { try { return git("show", `${basis}:${pfad}`); } catch { return ""; } };
 const schluessel = (t) => `${t.url}|${t.datum}`;
@@ -34,12 +28,14 @@ const neueTermine = new Set(termineNeu.termine.map(schluessel));
 for (const t of aktuelleTermine(termineLesen(altText("inhalte/termine.md")).termine, heute))
   if (!neueTermine.has(schluessel(t))) fehler.push(`Kommender Termin wurde gelöscht oder verändert: „${t.titel}“ (${schluessel(t)}). Das darf nur ein Mensch.`);
 
-const poolAlt = alt("src/_data/wissenspool.yaml"), poolNeu = neu("src/_data/wissenspool.yaml");
-const titel = (p) => (p.bereiche || []).map((b) => b.titel);
+const poolNeu = wissenspoolLesen(readFileSync("inhalte/wissenspool.md", "utf8"));
+const poolAlt = wissenspoolLesen(altText("inhalte/wissenspool.md"));
+fehler.push(...poolNeu.fehler.map((f) => "wissenspool.md › " + f));
+const titel = (p) => p.bereiche.map((b) => b.titel);
 for (const t of titel(poolAlt)) if (!titel(poolNeu).includes(t)) fehler.push(`Wissenspool-Bereich wurde entfernt oder umbenannt: „${t}“.`);
-const zaehle = (p) => (p.bereiche || []).reduce((n, b) => n + (b.eintraege || []).length +
-  (b.gruppen || []).reduce((m, g) => m + (g.eintraege || []).length, 0), 0);
-if (zaehle(poolNeu) < zaehle(poolAlt) - 3) fehler.push(`Im Wissenspool wurden mehr als 3 Einträge entfernt (${zaehle(poolAlt)} → ${zaehle(poolNeu)}).`);
+const anzahl = (p) => alleEintraege(p).length + p.favoriten.length;
+if (anzahl(poolNeu) < anzahl(poolAlt))
+  fehler.push(`Im Wissenspool wurden Einträge entfernt (${anzahl(poolAlt)} → ${anzahl(poolNeu)}). Löschen darf nur ein Mensch.`);
 
 if (fehler.length) {
   console.error("\n✗ Der KI-Vorschlag verletzt die Schutzregeln:\n");

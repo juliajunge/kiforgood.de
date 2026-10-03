@@ -1,22 +1,15 @@
-// Prüft Termine (inhalte/termine.md) und Wissenspool (src/_data/wissenspool.yaml) vor jedem Build.
+// Prüft Termine (inhalte/termine.md) und Wissenspool (inhalte/wissenspool.md) vor jedem Build.
 // Bei einem Fehler bricht der Build ab – dann geht nichts online und die bisherige Seite bleibt bestehen.
 import { readFileSync, existsSync } from "node:fs";
-import { load } from "js-yaml";
 import { termineLesen } from "./termine.mjs";
+import { wissenspoolLesen, alleEintraege, linksIn } from "./wissenspool.mjs";
 
 const fehler = [];
 const hinweise = [];
-const datei = (pfad) => load(readFileSync(new URL("../" + pfad, import.meta.url), "utf8"));
 
 const istUrl = (u) => typeof u === "string" && (/^https?:\/\/[^\s]+$/.test(u) || /^\/[^\s]*$/.test(u));
 const bildDa = (b) => !b || /^https?:/.test(b) || existsSync(new URL("../src" + decodeURI(b), import.meta.url));
 
-function felderPruefen(obj, wo, erlaubt, pflicht) {
-  if (!obj || typeof obj !== "object") return fehler.push(`${wo}: Eintrag ist leer oder ungültig.`);
-  for (const f of pflicht) if (obj[f] == null || String(obj[f]).trim() === "") fehler.push(`${wo}: Feld „${f}“ fehlt.`);
-  for (const f of Object.keys(obj)) if (!erlaubt.includes(f)) fehler.push(`${wo}: Unbekanntes Feld „${f}“ (Tippfehler?). Erlaubt: ${erlaubt.join(", ")}`);
-  for (const [f, w] of Object.entries(obj)) if (typeof w === "string" && /\d\s*€|€\s*\d|EUR\s*\d/.test(w)) fehler.push(`${wo}: Feld „${f}“ enthält einen Preis – Preise werden nicht veröffentlicht (nur „kostenlos“).`);
-}
 
 // ---------- Termine (inhalte/termine.md) ----------
 const termineText = readFileSync(new URL("../inhalte/termine.md", import.meta.url), "utf8");
@@ -42,32 +35,27 @@ for (const t of termine.termine) (proUrl[t.url] ||= []).push(`Zeile ${t.nr}`);
 for (const [url, stellen] of Object.entries(proUrl))
   if (stellen.length > 1) hinweise.push(`termine.md › Gleicher Link bei mehreren Terminen (${stellen.join(", ")}): ${url} – bitte prüfen, ob das Absicht ist.`);
 
-// ---------- Wissenspool ----------
-const pool = datei("src/_data/wissenspool.yaml") || {};
-(pool.favoriten || []).forEach((f, i) => {
-  const wo = `wissenspool.yaml › favoriten › Nr. ${i + 1} („${f?.text ?? "?"}“)`;
-  felderPruefen(f, wo, ["bild", "bild_alt", "bild_url", "bild_position", "text", "url"], ["bild", "text", "url"]);
-  if (f?.url && !istUrl(f.url)) fehler.push(`${wo}: „url“ ist kein gültiger Link.`);
-  if (f?.bild && !bildDa(f.bild)) fehler.push(`${wo}: Bild nicht gefunden: ${f.bild}`);
-});
-if (!Array.isArray(pool.bereiche) || pool.bereiche.length === 0) fehler.push("wissenspool.yaml: Die Liste „bereiche:“ fehlt oder ist leer.");
-const eintragPruefen = (e, wo) => {
-  felderPruefen(e, wo, ["icon", "vor", "titel", "url", "zusatz", "text"], []);
-  if (!e) return;
-  if (!e.titel && !e.text) fehler.push(`${wo}: Braucht mindestens „titel“ (mit „url“) oder „text“.`);
-  if (e.titel && !e.url) fehler.push(`${wo}: „titel“ ohne „url“.`);
-  if (e.url && !istUrl(e.url)) fehler.push(`${wo}: „url“ ist kein gültiger Link.`);
+// ---------- Wissenspool (inhalte/wissenspool.md) ----------
+const pool = wissenspoolLesen(readFileSync(new URL("../inhalte/wissenspool.md", import.meta.url), "utf8"));
+fehler.push(...pool.fehler.map((f) => "wissenspool.md › " + f));
+hinweise.push(...pool.hinweise.map((h) => "wissenspool.md › " + h));
+const linksPruefen = (zeile, wo) => {
+  const links = linksIn(zeile);
+  if ((zeile.match(/\]\(/g) || []).length !== links.length || /\]\s+\(/.test(zeile))
+    fehler.push(`${wo}: Ein Link ist falsch geschrieben. Richtig: [Linktext](https://…) – ohne Leerzeichen zwischen ] und (.`);
+  for (const l of links) if (!istUrl(l.url)) fehler.push(`${wo}: Der Link ist ungültig: ${l.url}`);
 };
-(pool.bereiche || []).forEach((b, i) => {
-  const wo = `wissenspool.yaml › bereiche › „${b?.titel ?? "Nr. " + (i + 1)}“`;
-  felderPruefen(b, wo, ["titel", "bild", "bild_alt", "eintraege", "gruppen"], ["titel"]);
-  if (b?.bild && !bildDa(b.bild)) fehler.push(`${wo}: Bild nicht gefunden: ${b.bild}`);
-  (b?.eintraege || []).forEach((e, j) => eintragPruefen(e, `${wo} › Eintrag ${j + 1}`));
-  (b?.gruppen || []).forEach((g, j) => {
-    felderPruefen(g, `${wo} › Gruppe ${j + 1}`, ["titel", "ebene", "eintraege"], ["titel"]);
-    (g?.eintraege || []).forEach((e, k) => eintragPruefen(e, `${wo} › ${g?.titel} › Eintrag ${k + 1}`));
-  });
-});
+for (const f of pool.favoriten) {
+  const wo = `wissenspool.md › Zeile ${f.nr} („${f.text}“)`;
+  if (!istUrl(f.url)) fehler.push(`${wo}: Der Link ist ungültig: ${f.url}`);
+  if (!bildDa(f.bild)) fehler.push(`${wo}: Bild nicht gefunden: ${f.bild}`);
+}
+if (!pool.bereiche.length) fehler.push("wissenspool.md: Es gibt keinen Bereich (## …).");
+for (const b of pool.bereiche) {
+  if (b.bild && !bildDa(b.bild)) fehler.push(`wissenspool.md › Zeile ${b.nr} („${b.titel}“): Bild nicht gefunden: ${b.bild}`);
+  for (const e of alleEintraege({ bereiche: [b] }))
+    for (const z of [e.kopf, ...(e.text || [])]) linksPruefen(z, `wissenspool.md › Zeile ${e.nr}`);
+}
 
 for (const h of hinweise) console.log("Hinweis: " + h);
 if (fehler.length) {
@@ -75,4 +63,4 @@ if (fehler.length) {
   for (const f of fehler) console.error("  • " + f);
   process.exit(1);
 }
-console.log("✓ Daten geprüft: " + (termine.termine || []).length + " Termine, " + (pool.bereiche || []).length + " Wissenspool-Bereiche.");
+console.log(`✓ Daten geprüft: ${termine.termine.length} Termine, ${pool.bereiche.length} Wissenspool-Bereiche mit ${alleEintraege(pool).length} Einträgen.`);
