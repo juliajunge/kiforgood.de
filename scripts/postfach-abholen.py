@@ -1,4 +1,4 @@
-"""Holt Einreichungen aus dem Postfach aktualisierung@kiforgood.de (nur Python-Standardbibliothek).
+"""Holt Einreichungen aus dem Postfach aktualisiere@kiforgood.de (nur Python-Standardbibliothek).
 
   python3 scripts/postfach-abholen.py abholen   -> schreibt eingang/einreichungen.md (Mails bleiben ungelesen)
   python3 scripts/postfach-abholen.py erledigt  -> markiert die abgeholten Mails als gelesen
