@@ -33,16 +33,14 @@ content:
           language: markdown
 
   - name: seiten
-    label: Seiten (HTML – nur mit Vorsicht ändern)
+    label: Seiten (Startseite, Trainer*innen, Leitlinien …)
     type: collection
-    path: src/seiten
-    extension: html
-    view:
-      fields: [title, permalink]
+    path: inhalte/seiten
+    format: yaml-frontmatter
     fields:
-      - { name: title, label: Seitentitel (Browser-Tab), type: string }
-      - { name: description, label: Beschreibung für Suchmaschinen, type: text }
-      - { name: permalink, label: Adresse (nicht ändern), type: string, readonly: true }
-      - { name: bodyclass, label: Technisch (nicht ändern), type: string, hidden: true }
-      - { name: css, label: Technisch (nicht ändern), type: string, hidden: true }
-      - { name: body, label: Inhalt (HTML), type: code, options: { language: html } }
+      - name: body
+        label: Seite – so geschrieben, wie sie auf der Website erscheint
+        description: "Bausteine: Knopf: [Text](Link) · Bild: ![Beschreibung](/wp-content/uploads/…) · Hinweiskasten: > Text · Kasten: ::: kasten … ::: · Trennlinie: ---. Startseite und Workshops: Abschnitte (## …) nicht hinzufügen oder löschen."
+        type: code
+        options:
+          language: markdown

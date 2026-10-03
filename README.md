@@ -17,8 +17,9 @@ Inhalte (Texte, Termine, Links)  →  GitHub  →  automatische Prüfung  →  V
 - **Termine** stehen als lesbarer Text in `inhalte/termine.md`, so wie auf der Website. Vergangene Termine verschwinden jede Nacht
   automatisch von der Seite.
 - **Wissenspool-Links** stehen genauso als lesbarer Text in `inhalte/wissenspool.md`.
-- **Alle anderen Seiten** (Startseite, Trainer\*innen, Leitlinien, Impressum …) sind 1:1 aus WordPress
-  übernommen.
+- **Die Seiten** (Startseite, Trainer\*innen, Leitlinien, Impressum …) stehen ebenfalls als lesbarer Text
+  in `inhalte/seiten/`. Layout und Gestaltung sind 1:1 aus WordPress übernommen und liegen in Vorlagen,
+  die man beim Schreiben nicht kaputt machen kann.
 - Vor jeder Veröffentlichung prüft ein Skript Daten und Seiten. **Bei einem Fehler wird nichts
   veröffentlicht, und die bisherige Seite bleibt online.**
 - Jede Änderung wird gespeichert und kann mit einem Klick rückgängig gemacht werden.
