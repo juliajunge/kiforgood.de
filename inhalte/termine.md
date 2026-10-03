@@ -51,6 +51,10 @@ CorrelAid
 mit CorrelAid
 📅 Mittwoch, 7. Oktober 2026 | 13:00–14:00 Uhr
 
+Deutsche Stiftung für Engagement und Ehrenamt
+[Social Media: KI als kreative Assistenz – Wie Künstliche Intelligenz eure Social-Media-Arbeit erleichtert](https://pretix.eu/DSEE/socialmedia.2/)
+📅 Mittwoch, 7. Oktober 2026 | 17:00–18:15 Uhr
+
 Haus des Stiftens
 [KI-Kreativwerkstatt: Ideen, Texte & Posts mit Plan](https://www.hausdesstiftens.org/online-workshop/ki-kreativwerkstatt-ideen-texte-posts-mit-plan-3/)
 mit Katharina Groß
@@ -87,6 +91,11 @@ Haus des Stiftens
 [MS Copilot – Smarter arbeiten mit KI](https://www.hausdesstiftens.org/online-workshop/ms-copilot-smarter-arbeiten-mit-ki-4/)
 mit Barbara Zeidler
 📅 Montag, 9. November 2026 | 9:00–12:30 Uhr
+
+Landesservicestelle für bürgerschaftliches Engagement NRW
+[KI im Ehrenamt: Datenschutz & Co. im Blick](https://veranstaltungen-landesservicestelle-nrw.de/recht-regeln/datenschutz-ki/)
+mit Dr. Kristina Schreiber
+📅 Mittwoch, 11. November 2026 | 12:00–13:00 Uhr
 
 Haus des Stiftens
 [Freiwilligenkoordination durch KI-Einsatz erleichtern](https://www.hausdesstiftens.org/online-workshop/freiwilligenkoordination-durch-ki-einsatz-erleichtern-2/)
