@@ -1,0 +1,14 @@
+---
+layout: base.njk
+---
+{#- Rahmen für Textseiten: Titel und Inhalt kommen aus inhalte/seiten/<seite>.md -#}
+<main id="wp--skip-link--target" class="wp-block-group is-layout-flow wp-block-group-is-layout-flow">
+<div class="wp-block-group has-global-padding is-layout-constrained wp-block-group-is-layout-constrained">
+<div style="height:var(--wp--preset--spacing--50)" aria-hidden="true" class="wp-block-spacer"></div>
+<h1 class="has-text-align-center wp-block-post-title">{{ seiten[seite].titel }}</h1>
+<div style="margin-top:0;margin-bottom:0;height:var(--wp--preset--spacing--30)" aria-hidden="true" class="wp-block-spacer"></div>
+</div>
+<div class="entry-content wp-block-post-content has-global-padding is-layout-constrained wp-block-post-content-is-layout-constrained ki-textseite">
+{{ seiten[seite].html | safe }}
+</div>
+</main>

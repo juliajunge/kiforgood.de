@@ -1,0 +1,98 @@
+---
+title: KI for Good - Trainings & Tools für KI in NGOS - KI-Unterstützung für dein Engagement
+description: KI-Unterstützung für dein Engagement
+permalink: /
+bodyclass: home blog wp-custom-logo wp-embed-responsive wp-theme-twentytwentyfour
+css: index
+---
+{#- Startseite mit festem Layout. Die Texte stehen in inhalte/seiten/startseite.md (fünf ## Abschnitte). -#}
+{%- set a = seiten.startseite.abschnitte -%}
+{%- set kopf = a[0] -%}{%- set spalten = a[1] -%}{%- set ressourcen = a[2] -%}{%- set zitat = a[3] -%}{%- set kontakt = a[4] -%}
+{%- set abstand = "padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)" -%}
+{%- macro mitte(html) -%}{{ html | replace('<p class="wp-block-paragraph">', '<p class="has-text-align-center wp-block-paragraph">') | replace('<div class="wp-block-buttons ', '<div class="wp-block-buttons is-content-justification-center ') | safe }}{%- endmacro -%}
+{%- macro bild(b, klasse) -%}{% if b %}<figure class="wp-block-image {{ klasse }}"><img src="{{ b.src }}" alt="{{ b.alt }}" /></figure>{% endif %}{%- endmacro -%}
+<main id="wp--skip-link--target" class="wp-block-group is-layout-flow wp-container-core-group-is-layout-cb10d8c2 wp-block-group-is-layout-flow" style="margin-top:0">
+
+<div class="wp-block-group alignfull has-global-padding is-layout-constrained wp-container-core-group-is-layout-8a2b1b76 wp-block-group-is-layout-constrained" style="{{ abstand }}">
+<div class="wp-block-group has-global-padding is-layout-constrained wp-container-core-group-is-layout-2bf980eb wp-block-group-is-layout-constrained">
+<h1 class="wp-block-heading has-text-align-center has-x-large-font-size">{{ kopf.titelHtml | safe }}</h1>
+<div style="height:1.25rem" aria-hidden="true" class="wp-block-spacer"></div>
+{{ mitte(kopf.html) }}
+<div style="height:1.25rem" aria-hidden="true" class="wp-block-spacer"></div>
+{{ mitte(kopf.knoepfeHtml) }}
+</div>
+<div style="height:var(--wp--preset--spacing--30)" aria-hidden="true" class="wp-block-spacer"></div>
+{{ bild(kopf.bilder[0], "alignwide size-full is-style-rounded ki-abgerundet") }}
+</div>
+
+<div class="wp-block-group alignfull has-base-2-background-color has-background has-global-padding is-layout-constrained wp-container-core-group-is-layout-73128380 wp-block-group-is-layout-constrained" style="margin-top:0;margin-bottom:0;{{ abstand }}">
+<div class="wp-block-group is-vertical is-content-justification-center is-layout-flex wp-container-core-group-is-layout-0009407c wp-block-group-is-layout-flex">
+<h2 class="wp-block-heading has-text-align-center is-style-asterisk">{{ spalten.titelHtml | safe }}</h2>
+{{ mitte(spalten.html) }}
+</div>
+<div style="margin-top:0;margin-bottom:0;height:var(--wp--preset--spacing--40)" aria-hidden="true" class="wp-block-spacer"></div>
+<div class="wp-block-columns alignwide is-layout-flex wp-container-core-columns-is-layout-d525a65d wp-block-columns-is-layout-flex">
+{%- for t in spalten.teile %}
+<div class="wp-block-column is-layout-flow wp-container-core-column-is-layout-da384c3e wp-block-column-is-layout-flow">
+<h3 class="wp-block-heading has-text-align-left is-style-asterisk has-body-font-family has-medium-font-size" style="font-style:normal;font-weight:600"><strong>{{ t.titelHtml | safe }}</strong></h3>
+{{ t.html | safe }}
+</div>
+{%- endfor %}
+</div>
+<div style="height:var(--wp--preset--spacing--20)" aria-hidden="true" class="wp-block-spacer"></div>
+</div>
+
+<div class="wp-block-group alignfull has-global-padding is-layout-constrained wp-container-core-group-is-layout-36f65c2d wp-block-group-is-layout-constrained" style="margin-top:0;margin-bottom:0;{{ abstand }}">
+<div class="wp-block-group alignwide has-global-padding is-layout-constrained wp-container-core-group-is-layout-90edb088 wp-block-group-is-layout-constrained">
+<div class="wp-block-group is-vertical is-content-justification-center is-layout-flex wp-container-core-group-is-layout-5ef3efcf wp-block-group-is-layout-flex">
+<h2 class="wp-block-heading has-text-align-center is-style-asterisk">{{ ressourcen.titelHtml | safe }}</h2>
+{{ mitte(ressourcen.html) }}
+</div>
+{%- for t in ressourcen.teile %}
+<div style="height:var(--wp--preset--spacing--40)" aria-hidden="true" class="wp-block-spacer"></div>
+{%- set textspalte -%}
+<div class="wp-block-column is-vertically-aligned-center is-layout-flow wp-block-column-is-layout-flow" style="flex-basis:40%">
+<h3 class="wp-block-heading is-style-asterisk">{{ t.titelHtml | safe }}</h3>
+{{ t.html | replace('<ul class="wp-block-list">', '<ul style="line-height:1.75" class="wp-block-list is-style-checkmark-list">') | safe }}
+{{ mitte(t.knoepfeHtml) }}
+{{ t.newsletterHtml | replace('height="645"', 'height="900"') | safe }}
+</div>
+{%- endset -%}
+{%- set bildspalte -%}
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow" style="flex-basis:50%">
+{{ bild(t.bilder[0], "size-full is-style-rounded ki-abgerundet") }}
+</div>
+{%- endset %}
+<div class="wp-block-columns alignwide is-layout-flex wp-container-core-columns-is-layout-189a6e74 wp-block-columns-is-layout-flex">
+{% if loop.index0 % 2 == 1 %}{{ bildspalte | safe }}{{ textspalte | safe }}{% else %}{{ textspalte | safe }}{{ bildspalte | safe }}{% endif %}
+</div>
+{%- endfor %}
+</div>
+</div>
+
+<div class="wp-block-group alignfull has-base-color has-contrast-background-color has-text-color has-background has-global-padding is-layout-constrained wp-container-core-group-is-layout-248f7c56 wp-block-group-is-layout-constrained" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--60)">
+<div class="wp-block-group has-global-padding is-layout-constrained wp-block-group-is-layout-constrained">
+{{ zitat.absaetze[0] | replace('<p class="wp-block-paragraph">', '<p class="has-text-align-center has-base-color has-text-color has-heading-font-family has-large-font-size wp-block-paragraph" style="line-height:1.2">') | safe }}
+<div style="height:var(--wp--preset--spacing--10)" aria-hidden="true" class="wp-block-spacer"></div>
+<div class="wp-block-group is-vertical is-content-justification-center is-nowrap is-layout-flex wp-container-core-group-is-layout-e42cfab0 wp-block-group-is-layout-flex">
+{%- if zitat.bilder[0] %}
+<figure class="wp-block-image size-full is-resized has-custom-border"><img src="{{ zitat.bilder[0].src }}" alt="{{ zitat.bilder[0].alt }}" style="border-radius:100px;width:72px;height:auto" /></figure>
+{%- endif %}
+{{ zitat.absaetze[1] | replace('<p class="wp-block-paragraph">', '<p class="has-text-align-center wp-block-paragraph" style="margin-top:var(--wp--preset--spacing--10);margin-bottom:0">') | safe }}
+{%- for absatz in zitat.absaetze.slice(2) %}
+{{ absatz | replace('<p class="wp-block-paragraph">', '<p class="has-text-align-center has-contrast-3-color has-text-color has-small-font-size wp-block-paragraph" style="font-style:normal;font-weight:300">') | safe }}
+{%- endfor %}
+</div>
+</div>
+</div>
+
+<div class="wp-block-group alignfull has-global-padding is-layout-constrained wp-container-core-group-is-layout-36f65c2d wp-block-group-is-layout-constrained" style="margin-top:0;margin-bottom:0;{{ abstand }}">
+<div class="wp-block-group alignwide has-base-2-background-color has-background has-global-padding is-layout-constrained wp-container-core-group-is-layout-4e81a00d wp-block-group-is-layout-constrained" style="border-radius:16px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--50)">
+<div style="height:var(--wp--preset--spacing--10)" aria-hidden="true" class="wp-block-spacer"></div>
+<h2 class="wp-block-heading has-text-align-center has-x-large-font-size">{{ kontakt.titelHtml | safe }}</h2>
+{{ mitte(kontakt.html) }}
+{{ mitte(kontakt.knoepfeHtml) }}
+<div style="height:var(--wp--preset--spacing--10)" aria-hidden="true" class="wp-block-spacer"></div>
+</div>
+</div>
+</main>

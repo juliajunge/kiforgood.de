@@ -5,3 +5,10 @@
 
 /* Abgerundete Ecken für Bilder im Wissenspool (wie im WordPress-Original) */
 .wp-block-image.is-style-rounded.ki-abgerundet img { border-radius: var(--wp--preset--spacing--20); }
+
+/* Textseiten (inhalte/seiten/*.md) */
+.ki-textseite .ki-hinweis { background-color: #b0c4a32e; }
+.ki-textseite .ki-person { margin-top: 57px; }
+.ki-textseite > h2.wp-block-heading:not(.ki-person) { margin-top: var(--wp--preset--spacing--40); }
+.page-id-162 .ki-textseite h3 { text-align: center; }
+.ki-textseite .ki-kasten { padding: var(--wp--preset--spacing--40) var(--wp--preset--spacing--50); }

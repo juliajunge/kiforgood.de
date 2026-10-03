@@ -1,8 +1,9 @@
-// Prüft Termine (inhalte/termine.md) und Wissenspool (inhalte/wissenspool.md) vor jedem Build.
+// Prüft Termine, Wissenspool und Seiten (alles in inhalte/) vor jedem Build.
 // Bei einem Fehler bricht der Build ab – dann geht nichts online und die bisherige Seite bleibt bestehen.
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { termineLesen } from "./termine.mjs";
 import { wissenspoolLesen, alleEintraege, linksIn } from "./wissenspool.mjs";
+import { seiteLesen, seitePruefen, abschnitteLesen, bilderIn } from "./seiten.mjs";
 
 const fehler = [];
 const hinweise = [];
@@ -57,10 +58,30 @@ for (const b of pool.bereiche) {
     for (const z of [e.kopf, ...(e.text || [])]) linksPruefen(z, `wissenspool.md › Zeile ${e.nr}`);
 }
 
+// ---------- Seiten (inhalte/seiten/*.md) ----------
+const SEITEN = new URL("../inhalte/seiten/", import.meta.url);
+// Seiten mit festem Layout brauchen eine bestimmte Zahl von Abschnitten (## …)
+const ABSCHNITTE = { startseite: 5, workshops: 5 };
+let seitenAnzahl = 0;
+for (const datei of readdirSync(SEITEN).filter((d) => d.endsWith(".md"))) {
+  const name = datei.slice(0, -3);
+  const text = readFileSync(new URL(datei, SEITEN), "utf8");
+  const wo = `seiten/${datei}`;
+  seitenAnzahl++;
+  fehler.push(...seitePruefen(text).map((f) => `${wo} › ${f}`));
+  if (!seiteLesen(text).titel) fehler.push(`${wo}: Die erste Überschrift „# Seitentitel“ fehlt.`);
+  for (const b of bilderIn(text)) if (!bildDa(b)) fehler.push(`${wo}: Bild nicht gefunden: ${b}`);
+  if (ABSCHNITTE[name]) {
+    const titel = abschnitteLesen(text).map((a) => a.titel);
+    if (titel.length !== ABSCHNITTE[name])
+      fehler.push(`${wo}: Diese Seite hat ein festes Layout und braucht genau ${ABSCHNITTE[name]} Abschnitte (## …), gefunden: ${titel.length} (${titel.join(" / ")}).`);
+  }
+}
+
 for (const h of hinweise) console.log("Hinweis: " + h);
 if (fehler.length) {
   console.error(`\n✗ ${fehler.length} Fehler in den Daten – die Website wird NICHT veröffentlicht:\n`);
   for (const f of fehler) console.error("  • " + f);
   process.exit(1);
 }
-console.log(`✓ Daten geprüft: ${termine.termine.length} Termine, ${pool.bereiche.length} Wissenspool-Bereiche mit ${alleEintraege(pool).length} Einträgen.`);
+console.log(`✓ Daten geprüft: ${termine.termine.length} Termine, ${pool.bereiche.length} Wissenspool-Bereiche mit ${alleEintraege(pool).length} Einträgen, ${seitenAnzahl} Seiten.`);

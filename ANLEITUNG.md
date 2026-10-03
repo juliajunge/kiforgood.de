@@ -19,22 +19,21 @@ Jede Datei lässt sich auf github.com mit dem Stift-Symbol bearbeiten. Unten dan
 
 ## 2. Was steht wo?
 
-| Seite | Datei | Hinweis |
-|---|---|---|
-| Workshops: Terminliste | `inhalte/termine.md` | lesbarer Text, siehe unten |
-| Workshops: übriger Text | `src/seiten/workshops.njk` | HTML |
-| Wissenspool: Favoriten und Links | `inhalte/wissenspool.md` | lesbarer Text, siehe unten |
-| Startseite | `src/seiten/index.html` | HTML |
-| Trainer\*innen | `src/seiten/kontakt.html` | HTML |
-| Leitlinien | `src/seiten/orientierungshilfe.html` | HTML |
-| Impressum, Datenschutz, Newsletter | `src/seiten/….html` | HTML |
-| Aktionsseiten (Barcamp, KI-Teambesuch) | `src/seiten/….html` | HTML |
-| Kopf und Menü / Fußzeile | `src/_includes/partials/header.html`, `footer.html` | HTML |
-| Bilder | `src/wp-content/uploads/…` | gleiche Adressen wie bei WordPress |
+Alles, was ihr im Alltag ändert, steht als lesbarer Text im Ordner `inhalte/`:
 
-**HTML-Seiten:** Die Texte stehen zwischen den Zeichen `<p …>` und `</p>`. Den Text dazwischen könnt ihr
-gefahrlos ändern. Die Zeichen in spitzen Klammern bitte stehen lassen. Geht doch etwas schief, meldet die
-Prüfung den Fehler, und die alte Seite bleibt online.
+| Seite | Datei |
+|---|---|
+| Termine (Workshops) | `inhalte/termine.md` |
+| Wissenspool | `inhalte/wissenspool.md` |
+| Startseite | `inhalte/seiten/startseite.md` |
+| Workshops: Texte rund um die Terminliste | `inhalte/seiten/workshops.md` |
+| Trainer\*innen | `inhalte/seiten/kontakt.md` |
+| Leitlinien | `inhalte/seiten/orientierungshilfe.md` |
+| Newsletter, Impressum, Datenschutz, KI-Teambesuch | `inhalte/seiten/….md` |
+| Bilder | `src/wp-content/uploads/…` (gleiche Adressen wie bei WordPress) |
+
+Noch als HTML (selten geändert): Barcamp-Seite (`src/seiten/barcamp.html`), Menü und Fußzeile
+(`src/_includes/partials/`), Rahmen des Wissenspools (Titel und Abschlussbild).
 
 ## 3. Termine eintragen
 
@@ -103,6 +102,37 @@ Sieben Mails als Einstieg in generative KI und Prompting für NGOs.
   schreiben (beginnt mit `/wp-content/uploads/`). Ist der Pfad falsch, meldet die Prüfung
   „Bild nicht gefunden“, und nichts geht online.
 - Die Bildbeschreibung in `![…]` lesen Screenreader vor. Ein paar Worte genügen.
+
+## 4b. Seiten bearbeiten
+
+Die Seiten in `inhalte/seiten/` sind normaler Text. Der Titel steht in der ersten Zeile (`# …`),
+Überschriften beginnen mit `##`, `###` oder `####`. Absätze trennt eine Leerzeile, ein einfacher
+Zeilenumbruch bleibt ein Zeilenumbruch. **Fett** schreibt man `**so**`, *kursiv* `*so*`, Listen beginnen
+mit `- ` oder `1. `, Links sehen so aus: `[Linktext](https://…)`. Gender-Sternchen (Trainer*innen) sind kein
+Problem.
+
+Dazu gibt es ein paar Bausteine. Jeder steht in einem eigenen Absatz:
+
+| Baustein | So schreibt man ihn |
+|---|---|
+| Knopf | `Knopf: [Text](https://…)` (mehrere Zeilen = mehrere Knöpfe nebeneinander) |
+| Bild | `![Kurze Beschreibung](/wp-content/uploads/…/bild.jpg)` |
+| Bild rechts, 200 Pixel breit | `![…](/wp-content/uploads/…jpg "rechts 200")` |
+| Bild mit abgerundeten Ecken / im Querformat | `"rund"` / `"quer"` |
+| Foto links, Text daneben (z. B. Trainer\*innen) | `![…](… "daneben")` – der folgende Text bis zur nächsten Überschrift steht daneben |
+| Bild rechts, Text links | `![…](… "daneben rechts")` |
+| Hinweis (grün hinterlegt) | `> Text` – mit `> ## Text` als große Überschrift |
+| Farbiger Kasten um mehrere Absätze | eine Zeile `::: kasten`, dann der Inhalt, dann eine Zeile `:::` |
+| Trennlinie | `---` |
+| Newsletter-Anmeldeformular | `[[Newsletter-Anmeldung]]` |
+
+**Startseite und Workshop-Seite** haben ein festes Layout: Ihre Abschnitte (`## …`) erscheinen an festen
+Stellen. Ändert Texte, Bilder, Links und Knöpfe nach Belieben, aber fügt keine `##`-Abschnitte hinzu und
+löscht keine. Oben in der Datei steht, welcher Abschnitt wohin gehört. Die Prüfung meldet es, wenn die
+Anzahl nicht stimmt.
+
+**Neue Seiten** (z. B. Aktionsseiten) legt ihr bitte nicht selbst an. Dafür braucht es zusätzlich eine
+Adresse und einen Eintrag im Menü. Fragt dafür Claude oder schreibt Julia.
 
 ## 5. KI-Vorschläge annehmen
 
