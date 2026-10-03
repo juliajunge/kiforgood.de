@@ -70,7 +70,7 @@ jobs:
         run: |
           mkdir -p eingang
           test -s eingang/bericht.md || echo "Claude hat keinen Bericht geschrieben. Bitte die Änderungen unter „Files changed“ prüfen." > eingang/bericht.md
-          node scripts/vorschlag-pruefen.mjs origin/main
+          node scripts/vorschlag-pruefen.mjs HEAD
           npm run build
 
       - name: Vorschlag als Pull Request anlegen

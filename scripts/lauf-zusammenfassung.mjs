@@ -5,7 +5,7 @@ import { readFileSync, existsSync, appendFileSync } from "node:fs";
 
 const [protokollDatei] = process.argv.slice(2);
 const ziel = process.env.GITHUB_STEP_SUMMARY;
-const aus = (text) => (ziel ? appendFileSync(ziel, text + "\n") : console.log(text));
+const aus = (text) => { console.log(text); if (ziel) appendFileSync(ziel, text + "\n"); };
 const kurz = (s, n = 140) => (s.length > n ? s.slice(0, n) + " …" : s);
 
 aus("## Bericht der KI\n");
