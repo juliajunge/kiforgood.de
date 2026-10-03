@@ -66,6 +66,21 @@ listest sie im Bericht unter „Linktipps für den Wissenspool“.
 - Julia Junge / Wandel gestalten: <https://www.juliajunge.de/>
 - Brigitte Binder: <https://brigittebinder.de/>
 
+## Gründlich vorgehen
+
+Arbeite die Recherche vollständig ab, nicht stichprobenartig:
+
+1. **Jede Quelle** aus Abschnitt 4 einzeln öffnen (WebFetch).
+2. Liefert eine Seite keine Termine (z. B. weil sie per JavaScript nachlädt), suche gezielt:
+   `site:<domain> KI Workshop 2026` bzw. `site:<domain> KI Webinar` (WebSearch) und öffne die Treffer.
+3. **Jeden Suchbegriff** aus Abschnitt 2 mindestens einmal suchen, kombiniert mit „Workshop“,
+   „Webinar“ oder „Seminar“ und dem aktuellen bzw. nächsten Monat.
+4. **Jede Trainerin** aus Abschnitt 3 einzeln suchen (Name + „KI Workshop“ / „Webinar“).
+5. Kandidaten immer auf der Detailseite bestätigen, bevor du sie einträgst.
+
+Plane dafür ausreichend Schritte ein (typischerweise 40–80 Werkzeugaufrufe). Führe im Bericht unter
+„Durchsucht“ kurz auf, welche Quellen und Suchen du abgearbeitet hast und welche nicht auswertbar waren.
+
 ## Auswahlkriterien
 
 Nimm nur Termine auf, die:
@@ -135,6 +150,10 @@ Der Bericht wird zur Beschreibung des Änderungsvorschlags. Schreibe ihn kurz un
 
 ## Nicht aufgenommen
 - Kurz, mit Grund (z. B. „kein KI-Bezug“, „Datum unklar“)
+
+## Durchsucht
+- Quellen: … (nicht auswertbar: …)
+- Suchen: …
 ```
 
 Nenne im Bericht keine E-Mail-Adressen oder Namen von Einsender*innen.
