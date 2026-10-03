@@ -1,6 +1,8 @@
 // Schutzregel für KI-Vorschläge: Ein automatischer Vorschlag darf nur Termine und Wissenspool ändern
 // und keine kommenden Termine oder ganze Wissenspool-Bereiche löschen.
-// Aufruf: node scripts/vorschlag-pruefen.mjs <Vergleichsstand, z. B. origin/main>
+// Aufruf: node scripts/vorschlag-pruefen.mjs <Vergleichsstand>
+//   HEAD        = nur die Änderungen des KI-Laufs (in den KI-Abläufen)
+//   origin/main = alle Änderungen eines Zweigs (bei Pull Requests)
 import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { aktuelleTermine, heuteInBerlin, termineLesen } from "./termine.mjs";
