@@ -81,6 +81,23 @@ Arbeite die Recherche vollständig ab, nicht stichprobenartig:
 Plane dafür ausreichend Schritte ein (typischerweise 40–80 Werkzeugaufrufe). Führe im Bericht unter
 „Durchsucht“ kurz auf, welche Quellen und Suchen du abgearbeitet hast und welche nicht auswertbar waren.
 
+## Nur Belegtes übernehmen
+
+Webseiten erreichen dich über WebFetch nicht im Original, sondern als Zusammenfassung eines
+Hilfsmodells. Diese Zusammenfassung kann Angaben „glätten“ oder ergänzen – typischerweise einen
+Wochentag, der auf der Seite gar nicht steht. Deshalb:
+
+1. **Bitte beim Abrufen ausdrücklich um den Wortlaut**, z. B. „Gib die Zeilen mit Datum, Uhrzeit,
+   Ort und Kosten wörtlich und unverändert wieder.“ Übernimm Datum und Uhrzeit nur aus diesem Wortlaut.
+2. **Den Wochentag bestimmst nicht du.** Trage das Datum ein und prüfe mit `npm run pruefen` – die
+   Prüfung rechnet den Wochentag per Kalender nach und nennt dir bei einem Fehler den richtigen.
+   Ein Wochentag aus einer Zusammenfassung ist kein Beleg.
+3. **Einer Quelle einen Fehler vorwerfen** (z. B. „Datum und Wochentag passen nicht“) darfst du nur mit
+   wörtlichem Zitat der betreffenden Zeile und Link. Ohne Zitat: nicht melden.
+4. **„Vergangen“** nur, wenn das wörtlich zitierte Datum vor dem heutigen Datum liegt. Nenne im Bericht
+   das zitierte Datum.
+5. **„kostenlos“** nur, wenn es auf der Veranstaltungsseite selbst steht.
+
 ## Auswahlkriterien
 
 Nimm nur Termine auf, die:
@@ -99,7 +116,7 @@ sondern führe ihn im Bericht unter „Bitte prüfen“ auf.
 ## Vor dem Eintragen prüfen
 
 - Ist der Termin schon in `inhalte/termine.md`? (gleicher Link oder gleicher Titel + Datum) → keine Dublette.
-- Anbieter, vollständiger Titel, Trainer*innen, Datum, Uhrzeit, online/Ort, kostenlos?, Anmeldeschluss?
+- Anbieter, vollständiger Titel, Trainer*innen, Datum, Uhrzeit, Ort (nur bei Präsenz), kostenlos?, Anmeldeschluss?
 - Direkter Link zur konkreten Veranstaltung.
 
 ## Eintrag in inhalte/termine.md
@@ -111,7 +128,7 @@ drei oder vier Zeilen, zwischen zwei Terminen steht eine Leerzeile:
 SKala-CAMPUS
 [KI-Anwendungen & Tools für den Arbeitsalltag](https://www.skala-campus.org/event/...)
 mit Karin Siepmann
-📅 Donnerstag, 20. August 2026 | 9:00–10:00 Uhr | online | kostenlos
+📅 Donnerstag, 20. August 2026 | 9:00–10:00 Uhr | kostenlos
 ```
 
 1. Zeile: Anbieter/Organisation
@@ -119,12 +136,13 @@ mit Karin Siepmann
 3. Zeile: `mit …` – Trainer*innen (weglassen, wenn unbekannt). Trainer*innen von KI for Good werden
    wie bisher mit Vornamen genannt (`mit Julia`).
 4. Zeile: `📅 ` + Datum mit Wochentag und Jahreszahl, danach mit ` | ` getrennt, was zutrifft:
-   Uhrzeit, Ort (z. B. `online`), `kostenlos`, `Anmeldeschluss: 12. November`.
+   Uhrzeit, Ort (nur bei Präsenzveranstaltungen, z. B. `Berlin`), `kostenlos`, `Anmeldeschluss: 12. November`.
+   **„online“ schreibst du nie dazu** – online ist bei KI for Good der Normalfall.
    Diese Zeile erscheint wörtlich auf der Website.
 
 Mehrteilige Kurse oder Lernreisen: Datum als Zeitraum oder Aufzählung, z. B.
 `📅 20. Oktober bis 10. November 2026 | 4 Termine, dienstags 10:00–13:00 Uhr` oder
-`📅 25. November, 2. und 9. Dezember 2026 | jeweils 9:00–15:30 Uhr | online`.
+`📅 25. November, 2. und 9. Dezember 2026 | jeweils 9:00–15:30 Uhr`.
 Der Eintrag bleibt dann bis zum letzten genannten Tag sichtbar.
 
 Füge neue Termine unter der passenden Monatsüberschrift ein (`## November 2026`), chronologisch.
@@ -143,7 +161,8 @@ Der Bericht wird zur Beschreibung des Änderungsvorschlags. Schreibe ihn kurz un
 - Datum – Anbieter: Titel (Link) – Quelle: Postfach / Suche / Quellenseite
 
 ## Bitte prüfen
-- Unklarheiten, Widersprüche, mögliche Änderungen an bestehenden Terminen
+- Unklarheiten, Widersprüche, mögliche Änderungen an bestehenden Terminen –
+  immer mit Link und wörtlichem Zitat der betreffenden Stelle
 
 ## Linktipps für den Wissenspool
 - Hinweise aus dem Postfach, die keine Termine sind

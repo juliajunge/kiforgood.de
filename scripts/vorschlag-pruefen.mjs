@@ -10,6 +10,8 @@ import { wissenspoolLesen, alleEintraege } from "./wissenspool.mjs";
 
 const ERLAUBT = ["inhalte/termine.md", "inhalte/wissenspool.md"];
 const basis = process.argv[2] || "origin/main";
+// Bei Korrekturen, die ein Mensch per Kommentar beauftragt hat, darf auch gelöscht werden.
+const loeschenErlaubt = process.argv.includes("--loeschen-erlaubt");
 const git = (...args) => execFileSync("git", args, { encoding: "utf8" });
 const fehler = [];
 
@@ -27,16 +29,16 @@ const schluessel = (t) => `${t.url}|${t.datum}`;
 const termineNeu = termineLesen(readFileSync("inhalte/termine.md", "utf8"));
 fehler.push(...termineNeu.fehler.map((f) => "termine.md › " + f));
 const neueTermine = new Set(termineNeu.termine.map(schluessel));
-for (const t of aktuelleTermine(termineLesen(altText("inhalte/termine.md")).termine, heute))
+for (const t of loeschenErlaubt ? [] : aktuelleTermine(termineLesen(altText("inhalte/termine.md")).termine, heute))
   if (!neueTermine.has(schluessel(t))) fehler.push(`Kommender Termin wurde gelöscht oder verändert: „${t.titel}“ (${schluessel(t)}). Das darf nur ein Mensch.`);
 
 const poolNeu = wissenspoolLesen(readFileSync("inhalte/wissenspool.md", "utf8"));
 const poolAlt = wissenspoolLesen(altText("inhalte/wissenspool.md"));
 fehler.push(...poolNeu.fehler.map((f) => "wissenspool.md › " + f));
 const titel = (p) => p.bereiche.map((b) => b.titel);
-for (const t of titel(poolAlt)) if (!titel(poolNeu).includes(t)) fehler.push(`Wissenspool-Bereich wurde entfernt oder umbenannt: „${t}“.`);
+for (const t of loeschenErlaubt ? [] : titel(poolAlt)) if (!titel(poolNeu).includes(t)) fehler.push(`Wissenspool-Bereich wurde entfernt oder umbenannt: „${t}“.`);
 const anzahl = (p) => alleEintraege(p).length + p.favoriten.length;
-if (anzahl(poolNeu) < anzahl(poolAlt))
+if (!loeschenErlaubt && anzahl(poolNeu) < anzahl(poolAlt))
   fehler.push(`Im Wissenspool wurden Einträge entfernt (${anzahl(poolAlt)} → ${anzahl(poolNeu)}). Löschen darf nur ein Mensch.`);
 
 if (fehler.length) {

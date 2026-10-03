@@ -8,13 +8,14 @@ SO WIRD EIN TERMIN EINGETRAGEN – einfach einen vorhandenen Termin kopieren und
 Haus des Stiftens                                  ← 1. Zeile: Anbieter
 [Prompting mit Plan](https://www.beispiel.de/…)    ← 2. Zeile: Titel in [ ], direkt danach Link in ( )
 mit Julia                                          ← 3. Zeile: Trainer*innen (kann fehlen)
-📅 Mittwoch, 7. Oktober 2026 | 9:00–13:00 Uhr | online | kostenlos
+📅 Mittwoch, 7. Oktober 2026 | 9:00–13:00 Uhr | kostenlos
 
 Wichtig:
 - Zwischen zwei Terminen steht eine Leerzeile.
 - Die 📅-Zeile erscheint genau so auf der Website. Sie beginnt immer mit dem Datum (mit Jahreszahl).
   Mehrteilig geht auch: „20. Oktober bis 10. November 2026“ oder „25. November, 2. und 9. Dezember 2026“.
-- Danach mit | getrennt: Uhrzeit, Ort, „kostenlos“, „Anmeldeschluss: 12. November“ – was zutrifft.
+- Danach mit | getrennt: Uhrzeit, Ort (nur bei Präsenz), „kostenlos“, „Anmeldeschluss: 12. November“.
+- „online“ schreiben wir nie dazu – online ist der Normalfall. Nur bei Präsenz den Ort nennen.
 - Keine Preise eintragen (z. B. 85 €), nur „kostenlos“, wenn es stimmt.
 - Die Monatsüberschriften (## Oktober 2026) dienen nur der Übersicht. Die Website sortiert selbst.
 - Vergangene Termine verschwinden automatisch von der Website. Ihr könnt sie hier stehen lassen

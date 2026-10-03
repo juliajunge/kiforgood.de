@@ -46,18 +46,18 @@ Am einfachsten kopiert ihr einen vorhandenen Termin und passt ihn an:
 Haus des Stiftens
 [Prompting mit Plan – KI clever nutzen im NPO-Alltag](https://www.hausdesstiftens.org/…)
 mit Julia
-📅 Mittwoch, 7. Oktober 2026 | 9:00–13:00 Uhr | online | kostenlos
+📅 Mittwoch, 7. Oktober 2026 | 9:00–13:00 Uhr | kostenlos
 
 CorrelAid
 [KI aber ohne den Hype](https://correlaid.org/…)
-📅 Mittwoch, 7. Oktober 2026 | 13:00–14:00 Uhr | online
+📅 Mittwoch, 7. Oktober 2026 | 13:00–14:00 Uhr
 ```
 
 - **1. Zeile:** Anbieter. **2. Zeile:** Titel in eckigen Klammern, direkt dahinter der Link in runden
   Klammern. **3. Zeile:** „mit …“ (kann fehlen). **Letzte Zeile:** 📅 mit Datum und Jahreszahl.
 - **Zwischen zwei Terminen eine Leerzeile.**
 - Die 📅-Zeile erscheint wörtlich auf der Website. Nach dem Datum folgt mit `|` getrennt, was zutrifft:
-  Uhrzeit, Ort, `kostenlos`, `Anmeldeschluss: 12. November`. **Keine Preise.**
+  Uhrzeit, Ort (nur bei Präsenz – „online“ schreiben wir nie, das ist der Normalfall), `kostenlos`, `Anmeldeschluss: 12. November`. **Keine Preise.**
 - Mehrteilige Kurse: `📅 20. Oktober bis 10. November 2026 | …` oder
   `📅 25. November, 2. und 9. Dezember 2026 | …`. Sie bleiben bis zum letzten Tag sichtbar.
 - Die Monatsüberschriften dienen nur der Übersicht. Die Website sortiert selbst.
@@ -145,6 +145,19 @@ Montags (Termine) und am Monatsanfang (Links) kommt eine Mail von GitHub:
 4. Passt alles → **Merge pull request** → **Confirm merge**. Nach etwa einer Minute ist es online.
 5. Einzelne Einträge passen nicht → in **Files changed** über „…“ → **Edit file** die Zeilen löschen,
    dann mergen. Oder den Vorschlag mit **Close pull request** komplett verwerfen.
+
+### Korrekturen per Kommentar
+
+Passt an einem KI-Vorschlag etwas nicht, schreibt im Vorschlag (ganz unten im Reiter
+**Conversation**) einen Kommentar, der mit **@claude** beginnt, zum Beispiel:
+
+> @claude Die Parisax-Workshops am 21. Oktober und 9. Dezember 2026 bitte auch eintragen.
+
+> @claude Den NRW-Termin bitte wieder rausnehmen, der ist nicht kostenlos.
+
+Nach ein paar Minuten ist der Vorschlag geändert, und Claude antwortet im Kommentar, was es getan hat.
+Danach wie gewohnt unter **Files changed** prüfen und **Merge** klicken. Das funktioniert nur bei
+KI-Vorschlägen und nur für Mitwirkende des Repos. Geändert werden können nur Termine und Wissenspool.
 
 ## 6. Einreichungen per Mail
 
