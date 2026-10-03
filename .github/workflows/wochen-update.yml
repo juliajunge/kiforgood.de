@@ -55,13 +55,16 @@ jobs:
             Führe das wöchentliche Termine-Update für die Website KI for Good durch.
             Halte dich genau an .claude/skills/termine-recherche/SKILL.md und an CLAUDE.md.
             Einreichungen aus dem Postfach (falls vorhanden): eingang/einreichungen.md
-            Ändere ausschließlich inhalte/termine.md. Schreibe deinen Bericht nach eingang/bericht.md.
+            Ändere ausschließlich inhalte/termine.md. Schreibe am Ende IMMER einen Bericht nach eingang/bericht.md –
+            auch wenn du nichts geändert hast (dann mit Begründung).
           claude_args: >-
-            --allowedTools "Read,Glob,Grep,Edit(inhalte/termine.md),Write(eingang/bericht.md),WebSearch,WebFetch,Bash(npm run pruefen)"
+            --allowedTools "Read,Glob,Grep,Edit,Write,WebSearch,WebFetch,Bash(npm run pruefen)"
             --disallowedTools "Bash(git:*)"
 
       - name: Schutzregeln und Daten prüfen
         run: |
+          mkdir -p eingang
+          test -s eingang/bericht.md || echo "Claude hat keinen Bericht geschrieben. Bitte die Änderungen unter „Files changed“ prüfen." > eingang/bericht.md
           node scripts/vorschlag-pruefen.mjs origin/main
           npm run build
 
