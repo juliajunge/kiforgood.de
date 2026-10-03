@@ -4,7 +4,7 @@ Dies ist die Website **kiforgood.de**: eine statische Seite, gebaut mit Eleventy
 Die Seite muss stabil erreichbar bleiben. Deshalb gelten diese Regeln ohne Ausnahme:
 
 1. **Automatische Aktualisierungen ändern nur Daten**: `inhalte/termine.md` (Termine) und
-   `src/_data/wissenspool.yaml` (Linksammlung). Alles andere – Seiten, Vorlagen, Stile, Skripte,
+   `inhalte/wissenspool.md` (Linksammlung). Alles andere – Seiten, Vorlagen, Stile, Skripte,
    Workflows, diese Datei – ändern nur Menschen oder Agenten, die ein Mensch ausdrücklich darum gebeten hat.
 2. **Nichts direkt veröffentlichen.** Ergebnisse sind immer Vorschläge (Pull Requests), die ein Mensch annimmt.
    Niemals auf `main` pushen, niemals Workflows oder Prüfskripte abschwächen.

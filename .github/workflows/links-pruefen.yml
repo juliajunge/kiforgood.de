@@ -53,9 +53,9 @@ jobs:
             Führe die monatliche Linkpflege für die Website KI for Good durch.
             Halte dich genau an .claude/skills/links-pflegen/SKILL.md und an CLAUDE.md.
             Ergebnis des Linkcheckers: eingang/linkpruefung.md
-            Ändere ausschließlich src/_data/wissenspool.yaml. Schreibe deinen Bericht nach eingang/bericht.md.
+            Ändere ausschließlich inhalte/wissenspool.md. Schreibe deinen Bericht nach eingang/bericht.md.
           claude_args: >-
-            --allowedTools "Read,Glob,Grep,Edit(src/_data/wissenspool.yaml),Write(eingang/bericht.md),WebSearch,WebFetch,Bash(npm run pruefen)"
+            --allowedTools "Read,Glob,Grep,Edit(inhalte/wissenspool.md),Write(eingang/bericht.md),WebSearch,WebFetch,Bash(npm run pruefen)"
             --disallowedTools "Bash(git:*)"
 
       - name: Schutzregeln und Daten prüfen
@@ -67,7 +67,7 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           branch: aktualisierung/links-${{ steps.monat.outputs.name }}
-          add-paths: src/_data/wissenspool.yaml
+          add-paths: inhalte/wissenspool.md
           commit-message: "Wissenspool: Linkpflege ${{ steps.monat.outputs.name }}"
           title: "Linkpflege ${{ steps.monat.outputs.name }} (KI-Vorschlag)"
           body-path: eingang/bericht.md

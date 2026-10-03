@@ -22,44 +22,15 @@ content:
   - name: wissenspool
     label: Wissenspool
     type: file
-    path: src/_data/wissenspool.yaml
-    format: yaml
+    path: inhalte/wissenspool.md
+    format: yaml-frontmatter
     fields:
-      - name: favoriten
-        label: Unsere Favoriten (Kacheln oben)
-        type: object
-        list: true
-        fields:
-          - { name: bild, label: Bild, type: image, required: true }
-          - { name: bild_alt, label: Bildbeschreibung (für Screenreader), type: string }
-          - { name: text, label: Text auf dem Knopf, type: string, required: true }
-          - { name: url, label: Link, type: string, required: true }
-          - { name: bild_url, label: Link beim Klick aufs Bild (optional), type: string }
-      - name: bereiche
-        label: Bereiche
-        type: object
-        list: true
-        fields:
-          - { name: titel, label: Überschrift, type: string, required: true }
-          - { name: bild, label: Bild unter dem Bereich (optional), type: image }
-          - name: eintraege
-            label: Einträge
-            type: object
-            list: true
-            fields: &eintrag
-              - { name: icon, label: "Symbol (z. B. 📋 🎓 🎬 🎧 ✉️)", type: string }
-              - { name: titel, label: Linktext, type: string }
-              - { name: url, label: Link, type: string }
-              - { name: zusatz, label: "Zusatz nach dem Link (fett, Links als [Text](https://…))", type: string }
-              - { name: text, label: "Beschreibung (Links als [Text](https://…))", type: text }
-          - name: gruppen
-            label: Unterüberschriften mit Einträgen (optional)
-            type: object
-            list: true
-            fields:
-              - { name: titel, label: Unterüberschrift, type: string }
-              - { name: ebene, label: "Größe (3 = größer, 4 = kleiner)", type: number }
-              - { name: eintraege, label: Einträge, type: object, list: true, fields: *eintrag }
+      - name: body
+        label: Wissenspool – so geschrieben, wie er auf der Website erscheint
+        description: Einen vorhandenen Eintrag kopieren und anpassen. Zwischen zwei Einträgen eine Leerzeile. Neue Bilder unter „Media“ hochladen. Die Erklärung steht ganz oben in der Datei.
+        type: code
+        options:
+          language: markdown
 
   - name: seiten
     label: Seiten (HTML – nur mit Vorsicht ändern)

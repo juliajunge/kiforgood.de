@@ -23,7 +23,7 @@ Jede Datei lässt sich auf github.com mit dem Stift-Symbol bearbeiten. Unten dan
 |---|---|---|
 | Workshops: Terminliste | `inhalte/termine.md` | lesbarer Text, siehe unten |
 | Workshops: übriger Text | `src/seiten/workshops.njk` | HTML |
-| Wissenspool: Favoriten und Links | `src/_data/wissenspool.yaml` | Liste, siehe unten |
+| Wissenspool: Favoriten und Links | `inhalte/wissenspool.md` | lesbarer Text, siehe unten |
 | Startseite | `src/seiten/index.html` | HTML |
 | Trainer\*innen | `src/seiten/kontakt.html` | HTML |
 | Leitlinien | `src/seiten/orientierungshilfe.html` | HTML |
@@ -69,22 +69,40 @@ CorrelAid
 Die dauerhaften Angebote (z. B. der Selbstlernkurs) stehen in derselben Datei unter
 `## Dauerhafte Angebote`, jeweils mit einer `### Überschrift`.
 
-## 4. Wissenspool: die Felder
+## 4. Wissenspool pflegen
 
-```yaml
-bereiche:
-  - titel: Prompting                     # Überschrift des Bereichs
-    bild: /wp-content/uploads/…          # optional, Bild unter dem Bereich
-    eintraege:
-      - icon: 📋
-        titel: Fairlinked PromptGuide 2.0     # Linktext
-        url: https://www.fairlinked.org/…
-        text: Deutschsprachiger Prompt-Leitfaden, Stand August 2025.
+Der Wissenspool steht in `inhalte/wissenspool.md`, ebenfalls so, wie er auf der Website erscheint:
+
+```
+## Prompting
+
+📋 [Fairlinked PromptGuide 2.0](https://www.fairlinked.org/kostenloser-prompt-guide/)
+Deutschsprachiger Prompt-Leitfaden, Stand August 2025.
+
+✉️ [E-Mail-Kurs von Julia Junge](https://juliajunge.de/prompting)
+Sieben Mails als Einstieg in generative KI und Prompting für NGOs.
 ```
 
-- Bereiche mit Unterüberschriften nutzen `gruppen:` (jeweils mit `titel` und `eintraege`).
-- Weitere Links im Text schreibt man so: `[Linktext](https://…)`.
-- Farben und Ausrichtung der Bereiche wechseln automatisch ab.
+- **Ein Eintrag:** 1. Zeile Symbol und Link (erscheint fett), 2. Zeile Beschreibung. Dazwischen eine Leerzeile.
+- **Bereiche:** Jede Überschrift `## …` ist ein farbiger Abschnitt. Die Farben wechseln automatisch.
+  Unterüberschriften: `### …` (größer) oder `#### …` (kleiner).
+- **Weitere Links** in einer Zeile: einfach `[Linktext](https://…)` dazuschreiben.
+
+### Bilder
+
+- **Bild unter einem Bereich:** eine Bildzeile direkt unter der Bereichsüberschrift, mit Leerzeilen davor und danach:
+  `![Kurze Bildbeschreibung](/wp-content/uploads/2024/04/drache.webp)`
+- **Favoriten-Kacheln** (oben auf der Seite) bestehen aus einer Bildzeile und dem Knopf darunter:
+  ```
+  ![Bildbeschreibung](/wp-content/uploads/2026/08/image.png)
+  [🎓 KI vereint: Lernpfade & Webinare](https://www.hausdesstiftens.org/…)
+  ```
+  Das Bild führt zum selben Ziel wie der Knopf. Bei hochformatigen Bildern lässt sich der Ausschnitt
+  mit `"oben"`, `"mitte"` oder `"unten"` wählen: `![…](/wp-content/uploads/…png "unten")`.
+- **Neues Bild:** Im Web-Editor links auf **Media**, Bild hochladen, dann den Pfad in die Bildzeile
+  schreiben (beginnt mit `/wp-content/uploads/`). Ist der Pfad falsch, meldet die Prüfung
+  „Bild nicht gefunden“, und nichts geht online.
+- Die Bildbeschreibung in `![…]` lesen Screenreader vor. Ein paar Worte genügen.
 
 ## 5. KI-Vorschläge annehmen
 
