@@ -1,3 +1,5 @@
+---
+---
 # Termine
 
 <!--
@@ -36,7 +38,7 @@ Modul 1 zu den Grundlagen ist dauerhaft gratis.
 SKala-CAMPUS
 [Komplexes Wissen mit KI greifbar machen](https://www.skala-campus.org/event/komplexes-wissen-mit-ki-greifbar-machen/)
 mit SKala-CAMPUS
-📅 Dienstag, 6. Oktober 2026 | 9:00–10:00 Uhr | online | kostenlos
+📅 Dienstag, 6. Oktober 2026 | 9:00–10:00 Uhr | kostenlos
 
 Haus des Stiftens
 [Prompting mit Plan – KI clever nutzen im NPO-Alltag](https://www.hausdesstiftens.org/online-workshop/prompting-mit-plan-ki-clever-nutzen-im-npo-alltag-2/)
