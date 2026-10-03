@@ -53,7 +53,7 @@ mit CorrelAid
 
 Deutsche Stiftung für Engagement und Ehrenamt
 [Social Media: KI als kreative Assistenz – Wie Künstliche Intelligenz eure Social-Media-Arbeit erleichtert](https://pretix.eu/DSEE/socialmedia.2/)
-📅 Mittwoch, 7. Oktober 2026 | 17:00–18:15 Uhr
+📅 Mittwoch, 7. Oktober 2026 | 17:00–18:15 Uhr | kostenlos
 
 Haus des Stiftens
 [KI-Kreativwerkstatt: Ideen, Texte & Posts mit Plan](https://www.hausdesstiftens.org/online-workshop/ki-kreativwerkstatt-ideen-texte-posts-mit-plan-3/)
