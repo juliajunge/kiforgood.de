@@ -1,4 +1,4 @@
-"""Holt Einreichungen aus dem Postfach aktualisierung@kiforgood.de (nur Python-Standardbibliothek).
+"""Holt Einreichungen aus dem Postfach aktualisiere@kiforgood.de (nur Python-Standardbibliothek).
 
   python3 scripts/postfach-abholen.py abholen   -> schreibt eingang/einreichungen.md (Mails bleiben ungelesen)
   python3 scripts/postfach-abholen.py erledigt  -> markiert die abgeholten Mails als gelesen
@@ -8,7 +8,7 @@ nie im Repository: eingang/ ist von Git ausgeschlossen.
 Umgebungsvariablen: IMAP_HOST, IMAP_BENUTZER, IMAP_PASSWORT, ERLAUBTE_ABSENDER (Komma-getrennt;
 ein Eintrag "@domain.de" erlaubt eine ganze Domain).
 """
-import email, imaplib, os, re, sys
+import email, html, imaplib, os, re, sys
 from email.header import decode_header, make_header
 from email.utils import parseaddr
 
@@ -33,9 +33,27 @@ def erlaubt(adresse):
     return False
 
 
+def dekodieren(inhalt, zeichensatz):
+    try:
+        return inhalt.decode(zeichensatz or "utf-8", errors="replace")
+    except LookupError:  # unbekannter Zeichensatz in der Mail
+        return inhalt.decode("utf-8", errors="replace")
+
+
+def html_zu_text(text):
+    text = re.sub(r"<!--.*?-->", "", text, flags=re.S)
+    text = re.sub(r"<(script|style|head)\b[^>]*>.*?</\1\s*>", "", text, flags=re.S | re.I)
+    text = re.sub(r"<blockquote\b.*?</blockquote\s*>", "", text, flags=re.S | re.I)  # zitierte Mails
+    text = re.sub(r"""<a\b[^>]*href\s*=\s*["']([^"']+)["'][^>]*>(.*?)</a\s*>""", r"\2 (\1)", text, flags=re.S | re.I)
+    text = re.sub(r"<(br|/p|/div|/li|/tr|/h\d)\b[^>]*>", "\n", text, flags=re.I)
+    text = re.sub(r"<[^>]+>", " ", text)
+    text = html.unescape(text).replace("\xa0", " ")
+    return "\n".join(re.sub(r"[ \t]+", " ", z).strip() for z in text.splitlines())
+
+
 def text_aus(msg):
     teile = msg.walk() if msg.is_multipart() else [msg]
-    html = None
+    gefunden_html = None
     for teil in teile:
         if teil.get_content_disposition() == "attachment":
             continue
@@ -43,14 +61,19 @@ def text_aus(msg):
         inhalt = teil.get_payload(decode=True)
         if not inhalt:
             continue
-        text = inhalt.decode(teil.get_content_charset() or "utf-8", errors="replace")
+        text = dekodieren(inhalt, teil.get_content_charset())
         if typ == "text/plain":
             return text
-        if typ == "text/html" and html is None:
-            html = re.sub(r"<(script|style)[^>]*>.*?</\1>", "", text, flags=re.S)
-            html = re.sub(r'<a [^>]*href="([^"]+)"[^>]*>(.*?)</a>', r"\2 (\1)", html, flags=re.S)
-            html = re.sub(r"<[^>]+>", " ", html)
-    return html or ""
+        if typ == "text/html" and gefunden_html is None:
+            gefunden_html = html_zu_text(text)
+    return gefunden_html or ""
+
+
+def betreff_aus(msg):
+    try:
+        return str(make_header(decode_header(msg.get("Subject", "")))).strip()
+    except Exception:  # fehlerhaft kodierter Betreff
+        return str(msg.get("Subject", "")).strip()
 
 
 def abholen():
@@ -65,9 +88,9 @@ def abholen():
         if not erlaubt(absender):
             abgelehnt += 1
             continue
-        betreff = str(make_header(decode_header(msg.get("Subject", ""))))
-        text = text_aus(msg)
-        text = "\n".join(z for z in text.splitlines() if not z.startswith(">"))  # zitierte Mails weglassen
+        betreff = betreff_aus(msg) or "(ohne Betreff)"
+        text = text_aus(msg).replace("\r\n", "\n")
+        text = "\n".join(z.rstrip() for z in text.splitlines() if not z.lstrip().startswith(">"))  # zitierte Mails weglassen
         text = re.sub(r"\n{3,}", "\n\n", text).strip()[:MAX_ZEICHEN]
         eintraege.append(f"## Einreichung {len(eintraege) + 1}: {betreff}\n\n{text}\n")
         uids.append(uid.decode())
