@@ -80,7 +80,7 @@ mit Julia
 CorrelAid
 [KI-Nutzung transparent machen: So geht’s richtig.](https://correlaid.org/veranstaltungen/cc26-ki-transparenz)
 mit CorrelAid
-📅 Montag, 2. November 2026 | 13:00–14:00 Uhr | online
+📅 Montag, 2. November 2026 | 13:00–14:00 Uhr
 
 Haus des Stiftens
 [MS Copilot – Smarter arbeiten mit KI](https://www.hausdesstiftens.org/online-workshop/ms-copilot-smarter-arbeiten-mit-ki-4/)
