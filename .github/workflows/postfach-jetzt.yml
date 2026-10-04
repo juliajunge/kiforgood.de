@@ -1,0 +1,124 @@
+name: Postfach jetzt verarbeiten (KI-Vorschlag)
+
+# Von Hand starten (Actions → dieser Ablauf → „Run workflow“), wenn eingegangene Mails nicht bis
+# Montag (Termine) bzw. bis zum 10. (Linktipps) warten sollen. Keine allgemeine Recherche – nur das Postfach.
+# - Termine: alle ungelesenen Mails (wie beim Wochen-Update); danach als gelesen markiert.
+# - Linktipps: alle Mails seit der letzten Linkpflege bis jetzt (wie bei der Linkpflege); nichts wird markiert.
+#   Was hier aufgenommen und gemergt wurde, erkennt die nächste Linkpflege als „schon vorhanden“.
+# Ergebnis ist IMMER nur ein Änderungsvorschlag (Pull Request), den ein Mensch annehmen muss.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: ki-vorschlag
+  cancel-in-progress: false
+
+jobs:
+  vorschlag:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      - name: Zeitstempel bestimmen
+        id: zeit
+        run: echo "name=$(TZ=Europe/Berlin date +%Y-%m-%d-%H%M)" >> "$GITHUB_OUTPUT"
+
+      - name: Termine aus dem Postfach holen (ungelesene Mails)
+        id: postfach
+        continue-on-error: true
+        run: python3 scripts/postfach-abholen.py abholen
+        env:
+          IMAP_HOST: ${{ secrets.IMAP_HOST }}
+          IMAP_BENUTZER: ${{ secrets.IMAP_BENUTZER }}
+          IMAP_PASSWORT: ${{ secrets.IMAP_PASSWORT }}
+          ERLAUBTE_ABSENDER: ${{ secrets.ERLAUBTE_ABSENDER }}
+
+      - name: Linktipps aus dem Postfach holen (seit der letzten Linkpflege)
+        id: linktipps
+        continue-on-error: true
+        run: python3 scripts/postfach-abholen.py linktipps-bis-jetzt
+        env:
+          IMAP_HOST: ${{ secrets.IMAP_HOST }}
+          IMAP_BENUTZER: ${{ secrets.IMAP_BENUTZER }}
+          IMAP_PASSWORT: ${{ secrets.IMAP_PASSWORT }}
+          ERLAUBTE_ABSENDER: ${{ secrets.ERLAUBTE_ABSENDER }}
+
+      - name: Claude verarbeitet die Einreichungen
+        id: claude
+        if: hashFiles('eingang/einreichungen.md') != '' || hashFiles('eingang/linktipps.md') != ''
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          prompt: |
+            Verarbeite die Einreichungen aus dem Postfach der Website KI for Good. Halte dich an CLAUDE.md.
+            Mache KEINE allgemeine Termin-Recherche und keine Linkprüfung – nur die Einreichungen.
+            1. Termine: eingang/einreichungen.md (falls vorhanden). Gehe dabei vor wie in
+               .claude/skills/termine-recherche/SKILL.md beschrieben (Abschnitte „Einreichungen aus dem Postfach“,
+               „Nur Belegtes übernehmen“, „Auswahlkriterien“, „Vor dem Eintragen prüfen“, „Eintrag in inhalte/termine.md“).
+               Linktipps in dieser Datei übergehst du hier.
+            2. Linktipps: eingang/linktipps.md (falls vorhanden). Gehe vor wie in
+               .claude/skills/links-pflegen/SKILL.md, Abschnitt „Linktipps aus dem Postfach“. Termine in dieser
+               Datei übergehst du hier.
+            Ändere ausschließlich inhalte/termine.md und inhalte/wissenspool.md. Schreibe am Ende IMMER einen Bericht
+            nach eingang/bericht.md mit den Abschnitten „Neue Termine“, „Neue Linktipps“, „Bitte prüfen“,
+            „Bitte zuordnen“ und „Nicht aufgenommen / schon vorhanden“ – auch wenn du nichts geändert hast
+            (dann mit Begründung). Nenne keine Mailadressen oder Namen von Einsender*innen.
+          claude_args: >-
+            --allowedTools "Read,Glob,Grep,Edit,Write,WebSearch,WebFetch,Bash(npm run pruefen)"
+            --disallowedTools "Bash(git:*)"
+
+      - name: Zusammenfassung des KI-Laufs anzeigen
+        if: always()
+        run: node scripts/lauf-zusammenfassung.mjs "${{ steps.claude.outputs.execution_file }}"
+
+      - name: Schutzregeln und Daten prüfen
+        run: |
+          mkdir -p eingang
+          test -s eingang/bericht.md || echo "Claude hat keinen Bericht geschrieben. Bitte die Änderungen unter „Files changed“ prüfen." > eingang/bericht.md
+          if [ "${{ steps.postfach.outcome }}" = "failure" ] || [ "${{ steps.linktipps.outcome }}" = "failure" ]; then
+            printf '\n## Postfach\n- ⚠️ Das Postfach konnte nicht (vollständig) gelesen werden. Details unter Actions in den Postfach-Schritten.\n' >> eingang/bericht.md
+          fi
+          node scripts/vorschlag-pruefen.mjs HEAD
+          npm run build
+
+      - name: Vorschlag als Pull Request anlegen
+        id: pr
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: aktualisierung/postfach-${{ steps.zeit.outputs.name }}
+          add-paths: |
+            inhalte/termine.md
+            inhalte/wissenspool.md
+          commit-message: "Postfach: Vorschlag ${{ steps.zeit.outputs.name }}"
+          title: "Postfach-Einreichungen ${{ steps.zeit.outputs.name }} (KI-Vorschlag)"
+          body-path: eingang/bericht.md
+          labels: ki-vorschlag
+          delete-branch: true
+
+      - name: Kein Vorschlag nötig
+        if: steps.pr.outputs.pull-request-number == ''
+        run: echo "Es gab nichts aufzunehmen – deshalb kein Vorschlag. Der Bericht der KI steht oben in der Zusammenfassung." | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Abgeholte Mails als erledigt markieren
+        # Nur wenn wirklich ein Vorschlag entstanden ist (ohne Änderungen legt der vorige Schritt keinen an).
+        if: steps.postfach.outcome == 'success' && steps.pr.outputs.pull-request-number != ''
+        run: python3 scripts/postfach-abholen.py erledigt
+        env:
+          IMAP_HOST: ${{ secrets.IMAP_HOST }}
+          IMAP_BENUTZER: ${{ secrets.IMAP_BENUTZER }}
+          IMAP_PASSWORT: ${{ secrets.IMAP_PASSWORT }}

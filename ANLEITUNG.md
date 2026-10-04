@@ -171,6 +171,20 @@ Oft reicht der Link allein – die KI liest die Angaben selbst von der Seite.
 
 Berücksichtigt werden nur Absender\*innen von der Freigabeliste (`ERLAUBTE_ABSENDER`, siehe unten).
 
+### Postfach sofort verarbeiten
+
+Wer nicht bis Montag bzw. bis zum 10. warten möchte:
+
+1. Auf GitHub oben auf **Actions**.
+2. Links **„Postfach jetzt verarbeiten (KI-Vorschlag)“** wählen.
+3. Rechts **Run workflow** → Branch `main` lassen → grüner Knopf **Run workflow**.
+4. Nach etwa 5–10 Minuten kommt ein Vorschlag wie gewohnt – oder, wenn nichts aufzunehmen war, steht der
+   Bericht der KI auf der Ergebnisseite des Laufs.
+
+Dabei werden alle ungelesenen Termin-Mails und alle Linktipps seit der letzten Linkpflege verarbeitet. Eine
+allgemeine Termin-Recherche findet nicht statt. Bitte den Vorschlag **vor dem nächsten 10. mergen** oder
+schließen – sonst schlägt die monatliche Linkpflege dieselben Linktipps noch einmal vor.
+
 - Mails im Posteingang bitte **erst nach der nächsten Linkpflege (am 10.) löschen**, sonst fehlen sie ihr.
 - Abgeholte Mails werden erst als gelesen markiert, wenn der Vorschlag (Pull Request) erstellt ist.
   Ungelesene Mails sind also noch nicht verarbeitet.
