@@ -97,6 +97,11 @@ Haus des Stiftens
 mit Barbara Zeidler
 📅 Montag, 9. November 2026 | 9:00–12:30 Uhr
 
+AWO Weiterbildung
+[Workshop KI (Künstliche Intelligenz) für die Praxis](https://www.awo-wkb.de/kurse/verwaltung-und-it/kurs/KI-Grundlagen-fuer-die-Praxis/262E-35111)
+mit Elena Fronk
+📅 Mittwoch, 11. November 2026 | 10:00–14:30 Uhr | Essen
+
 Landesservicestelle für bürgerschaftliches Engagement NRW
 [KI im Ehrenamt: Datenschutz & Co. im Blick](https://veranstaltungen-landesservicestelle-nrw.de/recht-regeln/datenschutz-ki/)
 mit Dr. Kristina Schreiber
