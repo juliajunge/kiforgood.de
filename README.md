@@ -31,7 +31,8 @@ Inhalte (Texte, Termine, Links)  →  GitHub  →  automatische Prüfung  →  V
 | bei jeder Änderung | Daten prüfen, Seite bauen, veröffentlichen | Seite ist aktuell |
 | täglich ca. 5 Uhr | Seite neu bauen | vergangene Termine verschwinden |
 | montags ca. 7 Uhr | KI recherchiert Termine + liest das Postfach | **Vorschlag** zum Annehmen |
-| am 1. des Monats | Linkprüfung, KI sucht Ersatz für kaputte Links | **Vorschlag** zum Annehmen |
+| am 10. des Monats | Linkprüfung, KI sucht Ersatz für kaputte Links und nimmt Linktipps aus dem Postfach auf | **Vorschlag** zum Annehmen |
+| von Hand, jederzeit | „Postfach jetzt verarbeiten“: KI nimmt eingegangene Termine und Linktipps auf | **Vorschlag** zum Annehmen |
 
 Die KI kann dabei **nichts selbst veröffentlichen**. Sie darf nur die Termin- bzw. Linkliste ändern,
 keine kommenden Termine löschen, und jeder Vorschlag wartet auf eure Freigabe.

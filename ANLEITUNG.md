@@ -136,7 +136,7 @@ Adresse und einen Eintrag im Menü. Fragt dafür Claude oder schreibt Julia.
 
 ## 5. KI-Vorschläge annehmen
 
-Montags (Termine) und am Monatsanfang (Links) kommt eine Mail von GitHub:
+Montags (Termine) und am 10. des Monats (Links) kommt eine Mail von GitHub:
 „Termine-Update 2026-KW41 (KI-Vorschlag)“.
 
 1. Mail öffnen → Link zum Vorschlag (Pull Request).
@@ -165,12 +165,27 @@ Akteur\*innen schicken Veranstaltungshinweise oder Linktipps an **aktualisiere@k
 Oft reicht der Link allein – die KI liest die Angaben selbst von der Seite.
 
 - **Termine:** Beim nächsten Montags-Update kommen sie in den Vorschlag.
-- **Linktipps:** Die monatliche Linkpflege (am 1.) liest alle Mails des Vormonats und schlägt die Linktipps
-  als neue Einträge im Wissenspool vor. Neue Bereiche legt sie nicht an; passt kein Bereich, steht der
-  Tipp im Bericht unter „Bitte zuordnen“.
-- Mails im Posteingang bitte **erst nach dem 1. des Folgemonats löschen**, sonst fehlen sie der Linkpflege. Berücksichtigt werden nur Absender\*innen von der Freigabeliste (`ERLAUBTE_ABSENDER`,
-siehe unten).
+- **Linktipps:** Die monatliche Linkpflege (am 10.) liest alle Mails seit der letzten Linkpflege (also vom
+  10. des Vormonats bis zum Vortag) und schlägt die Linktipps als neue Einträge im Wissenspool vor. Neue
+  Bereiche legt sie nicht an; passt kein Bereich, steht der Tipp im Bericht unter „Bitte zuordnen“.
 
+Berücksichtigt werden nur Absender\*innen von der Freigabeliste (`ERLAUBTE_ABSENDER`, siehe unten).
+
+### Postfach sofort verarbeiten
+
+Wer nicht bis Montag bzw. bis zum 10. warten möchte:
+
+1. Auf GitHub oben auf **Actions**.
+2. Links **„Postfach jetzt verarbeiten (KI-Vorschlag)“** wählen.
+3. Rechts **Run workflow** → Branch `main` lassen → grüner Knopf **Run workflow**.
+4. Nach etwa 5–10 Minuten kommt ein Vorschlag wie gewohnt – oder, wenn nichts aufzunehmen war, steht der
+   Bericht der KI auf der Ergebnisseite des Laufs.
+
+Dabei werden alle ungelesenen Termin-Mails und alle Linktipps seit der letzten Linkpflege verarbeitet. Eine
+allgemeine Termin-Recherche findet nicht statt. Bitte den Vorschlag **vor dem nächsten 10. mergen** oder
+schließen – sonst schlägt die monatliche Linkpflege dieselben Linktipps noch einmal vor.
+
+- Mails im Posteingang bitte **erst nach der nächsten Linkpflege (am 10.) löschen**, sonst fehlen sie ihr.
 - Abgeholte Mails werden erst als gelesen markiert, wenn der Vorschlag (Pull Request) erstellt ist.
   Ungelesene Mails sind also noch nicht verarbeitet.
 - Ist das Postfach nicht erreichbar (z. B. Passwort geändert), läuft das Update trotzdem. Im Bericht

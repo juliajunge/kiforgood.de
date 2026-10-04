@@ -3,11 +3,11 @@ name: Monatliche Linkprüfung
 # 1. Ein Linkchecker (lychee) prüft alle Links der gebauten Website.
 # 2. Für kaputte Links im Wissenspool sucht Claude Ersatz und schlägt ihn als Pull Request vor.
 # 3. Kaputte Links auf den übrigen Seiten werden im Bericht aufgeführt und von Hand korrigiert.
-# 4. Linktipps, die im Vormonat an das Postfach geschickt wurden, schlägt Claude als neue Einträge vor.
+# 4. Linktipps, die seit der letzten Linkpflege an das Postfach geschickt wurden, schlägt Claude als neue Einträge vor.
 
 on:
   schedule:
-    - cron: "0 5 1 * *" # am 1. jedes Monats gegen 7 Uhr
+    - cron: "0 5 10 * *" # am 10. jedes Monats gegen 7 Uhr (passt zu STICHTAG in scripts/postfach-abholen.py)
   workflow_dispatch:
 
 permissions:
@@ -32,12 +32,12 @@ jobs:
         id: monat
         run: echo "name=$(TZ=Europe/Berlin date +%Y-%m)" >> "$GITHUB_OUTPUT"
 
-      # Liest nur (alle Mails des Vormonats) und markiert nichts. Fehler stoppen die Linkprüfung nicht.
-      - name: Linktipps aus dem Postfach holen (Vormonat)
+      # Liest nur (alle Mails seit der letzten Linkpflege bis gestern) und markiert nichts. Fehler stoppen die Linkprüfung nicht.
+      - name: Linktipps aus dem Postfach holen
         id: postfach
         if: vars.POSTFACH_AKTIV == 'true'
         continue-on-error: true
-        run: python3 scripts/postfach-abholen.py vormonat
+        run: python3 scripts/postfach-abholen.py linktipps
         env:
           IMAP_HOST: ${{ secrets.IMAP_HOST }}
           IMAP_BENUTZER: ${{ secrets.IMAP_BENUTZER }}
@@ -57,7 +57,7 @@ jobs:
           fail: false
 
       - name: Claude pflegt den Wissenspool (kaputte Links, Linktipps)
-        if: hashFiles('eingang/linkpruefung.md') != '' || hashFiles('eingang/einreichungen.md') != ''
+        if: hashFiles('eingang/linkpruefung.md') != '' || hashFiles('eingang/linktipps.md') != ''
         id: claude
         uses: anthropics/claude-code-action@v1
         with:
@@ -68,7 +68,7 @@ jobs:
             Führe die monatliche Linkpflege für die Website KI for Good durch.
             Halte dich genau an .claude/skills/links-pflegen/SKILL.md und an CLAUDE.md.
             Ergebnis des Linkcheckers: eingang/linkpruefung.md
-            Linktipps aus dem Postfach (falls vorhanden): eingang/einreichungen.md
+            Linktipps aus dem Postfach (falls vorhanden): eingang/linktipps.md
             Ändere ausschließlich inhalte/wissenspool.md. Schreibe am Ende IMMER einen Bericht nach eingang/bericht.md –
             auch wenn du nichts geändert hast (dann mit Begründung).
           claude_args: >-
@@ -84,7 +84,7 @@ jobs:
           mkdir -p eingang
           test -s eingang/bericht.md || echo "Claude hat keinen Bericht geschrieben. Bitte die Änderungen unter „Files changed“ prüfen." > eingang/bericht.md
           if [ "${{ steps.postfach.outcome }}" = "failure" ]; then
-            printf '\n## Postfach\n- ⚠️ Das Postfach konnte nicht gelesen werden. Linktipps aus dem Vormonat fehlen in diesem Vorschlag. Details unter Actions im Schritt „Linktipps aus dem Postfach holen“.\n' >> eingang/bericht.md
+            printf '\n## Postfach\n- ⚠️ Das Postfach konnte nicht gelesen werden. Linktipps aus dem letzten Monat fehlen in diesem Vorschlag. Details unter Actions im Schritt „Linktipps aus dem Postfach holen“.\n' >> eingang/bericht.md
           fi
           node scripts/vorschlag-pruefen.mjs HEAD
           npm run build
