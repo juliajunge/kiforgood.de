@@ -162,8 +162,13 @@ KI-Vorschlägen und nur für Mitwirkende des Repos. Geändert werden können nur
 ## 6. Einreichungen per Mail
 
 Akteur\*innen schicken Veranstaltungshinweise oder Linktipps an **aktualisiere@kiforgood.de**.
-Beim nächsten Montags-Update liest die KI das Postfach. Termine kommen in den Vorschlag, Linktipps
-in den Bericht. Berücksichtigt werden nur Absender\*innen von der Freigabeliste (`ERLAUBTE_ABSENDER`,
+Oft reicht der Link allein – die KI liest die Angaben selbst von der Seite.
+
+- **Termine:** Beim nächsten Montags-Update kommen sie in den Vorschlag.
+- **Linktipps:** Die monatliche Linkpflege (am 1.) liest alle Mails des Vormonats und schlägt die Linktipps
+  als neue Einträge im Wissenspool vor. Neue Bereiche legt sie nicht an; passt kein Bereich, steht der
+  Tipp im Bericht unter „Bitte zuordnen“.
+- Mails im Posteingang bitte **erst nach dem 1. des Folgemonats löschen**, sonst fehlen sie der Linkpflege. Berücksichtigt werden nur Absender\*innen von der Freigabeliste (`ERLAUBTE_ABSENDER`,
 siehe unten).
 
 - Abgeholte Mails werden erst als gelesen markiert, wenn der Vorschlag (Pull Request) erstellt ist.
