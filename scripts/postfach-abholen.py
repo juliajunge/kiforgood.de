@@ -2,8 +2,9 @@
 
   python3 scripts/postfach-abholen.py abholen   -> schreibt eingang/einreichungen.md (Mails bleiben ungelesen)
   python3 scripts/postfach-abholen.py erledigt  -> markiert die abgeholten Mails als gelesen
-  python3 scripts/postfach-abholen.py vormonat  -> schreibt alle Mails des Vormonats (gelesen oder nicht) nach
-                                                   eingang/einreichungen.md, für die monatliche Linkpflege; ändert nichts
+  python3 scripts/postfach-abholen.py letzter-monat -> schreibt alle Mails vom gleichen Tag des Vormonats bis gestern
+                                                   (gelesen oder nicht) nach eingang/einreichungen.md, für die
+                                                   monatliche Linkpflege; ändert nichts
 
 Nur Mails von Absender*innen aus ERLAUBTE_ABSENDER werden weitergegeben. Absenderadressen landen
 nie im Repository: eingang/ ist von Git ausgeschlossen.
@@ -113,12 +114,14 @@ def abholen(suche="UNSEEN", uids_merken=True):
     print(f"{len(eintraege)} Einreichung(en) abgeholt, {abgelehnt} Mail(s) von unbekannten Absender*innen ignoriert.")
 
 
-def vormonat():
-    """Alle Mails des Vormonats, z. B. am 1. Oktober: 1.–30. September. Markiert nichts."""
-    erster = datetime.date.today().replace(day=1)
-    vorher = (erster - datetime.timedelta(days=1)).replace(day=1)
-    print(f"Zeitraum: {vorher} bis {erster - datetime.timedelta(days=1)}")
-    abholen(f"SINCE {imap_datum(vorher)} BEFORE {imap_datum(erster)}", uids_merken=False)
+def letzter_monat():
+    """Mails vom gleichen Tag des Vormonats bis gestern, z. B. am 10. Oktober: 10. September bis 9. Oktober.
+    Läuft die Linkpflege immer am selben Tag, schließen die Zeiträume lückenlos aneinander an. Markiert nichts."""
+    heute = datetime.date.today()
+    ende_vormonat = heute.replace(day=1) - datetime.timedelta(days=1)
+    beginn = ende_vormonat.replace(day=min(heute.day, ende_vormonat.day))
+    print(f"Zeitraum: {beginn} bis {heute - datetime.timedelta(days=1)}")
+    abholen(f"SINCE {imap_datum(beginn)} BEFORE {imap_datum(heute)}", uids_merken=False)
 
 
 def erledigt():
@@ -134,4 +137,4 @@ def erledigt():
 
 
 if __name__ == "__main__":
-    {"abholen": abholen, "erledigt": erledigt, "vormonat": vormonat}[sys.argv[1] if len(sys.argv) > 1 else "abholen"]()
+    {"abholen": abholen, "erledigt": erledigt, "letzter-monat": letzter_monat}[sys.argv[1] if len(sys.argv) > 1 else "abholen"]()
