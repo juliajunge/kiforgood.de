@@ -65,10 +65,29 @@ Haus des Stiftens
 mit Melisa M. Çiçek
 📅 Dienstag, 13. Oktober 2026 | 11:00–12:00 Uhr | kostenlos
 
+CorrelAid
+[Den Code of Conduct | Demokratische KI in die eigene Organisation bringen!](https://correlaid.org/veranstaltungen/demokratische-ki)
+mit CorrelAid
+📅 Dienstag, 13. Oktober 2026 | 9:00–12:00 Uhr
+
+CorrelAid
+[Wie erreicht unser Wissen die Menschen, wenn KI dazwischen steht?](https://correlaid.org/veranstaltungen/gemeinsam-machen-7)
+📅 Donnerstag, 15. Oktober 2026 | 9:30–12:30 Uhr
+
 Wandel gestalten
 [KI-Lernreise für NGOs: „Von Prompts zu Projekten“](https://www.juliajunge.de/ki-lernreise-klassik/)
 mit Julia
 📅 20. Oktober bis 10. November 2026 | 4 Termine, dienstags 10:00–13:00 Uhr
+
+CorrelAid
+[KI-Werkzeuge… aber welche? Tools in verschiedenen Anwendungsfeldern kennenlernen](https://correlaid.org/veranstaltungen/ws-ki-2)
+mit CorrelAid
+📅 Dienstag, 20. Oktober 2026 | 17:00–18:30 Uhr
+
+Parisax-Akademie
+[KI als Assistenz: Routine clever automatisieren](https://www.parisax-akademie.de/weiterbildungen/seminar/ki-als-assistenz-routine-clever-automatisieren--3532)
+mit Julia
+📅 Mittwoch, 21. Oktober 2026 | 9:00–13:00 Uhr | Anmeldeschluss: 12. Oktober
 
 SKala-CAMPUS
 [AI-OS: Dein persönliches Betriebssystem für die Zusammenarbeit mit KI](https://www.skala-campus.org/event/ai-os/)
@@ -86,6 +105,11 @@ CorrelAid
 [KI-Nutzung transparent machen: So geht’s richtig.](https://correlaid.org/veranstaltungen/cc26-ki-transparenz)
 mit CorrelAid
 📅 Montag, 2. November 2026 | 13:00–14:00 Uhr
+
+CorrelAid
+[KI kritisch hinterfragen… warum? Datenschutz, Nachhaltigkeit und Diskriminierung verstehen](https://correlaid.org/veranstaltungen/ws-ki-3)
+mit CorrelAid
+📅 Montag, 2. November 2026 | 17:00–18:30 Uhr
 
 AWO Weiterbildung
 [Workshop KI (Künstliche Intelligenz) für die Praxis](https://www.awo-wkb.de/kurse/verwaltung-und-it/kurs/KI-Grundlagen-fuer-die-Praxis/262E-35112)
@@ -106,6 +130,11 @@ Landesservicestelle für bürgerschaftliches Engagement NRW
 [KI im Ehrenamt: Datenschutz & Co. im Blick](https://veranstaltungen-landesservicestelle-nrw.de/recht-regeln/datenschutz-ki/)
 mit Dr. Kristina Schreiber
 📅 Mittwoch, 11. November 2026 | 12:00–13:00 Uhr
+
+CorrelAid
+[KI richtig nutzen… wie? Tipps und Tricks für Kommunikation und Wissensmanagement](https://correlaid.org/veranstaltungen/ws-ki-4)
+mit CorrelAid
+📅 Montag, 16. November 2026 | 17:00–18:30 Uhr
 
 Haus des Stiftens
 [Freiwilligenkoordination durch KI-Einsatz erleichtern](https://www.hausdesstiftens.org/online-workshop/freiwilligenkoordination-durch-ki-einsatz-erleichtern-2/)
@@ -134,10 +163,20 @@ Haus des Stiftens
 mit Jana
 📅 Dienstag, 1. Dezember 2026 | 9:00–13:00 Uhr
 
+CorrelAid
+[KI Nutzung vereinheitlichen… womit? Leitlinien für eure Organisation entwickeln](https://correlaid.org/veranstaltungen/ws-ki-5)
+mit CorrelAid
+📅 Donnerstag, 3. Dezember 2026 | 17:00–18:30 Uhr
+
 Paritätische Akademie Süd
 [Prompting leicht gemacht – KI als Einsteiger*in verstehen und nutzen](https://akademiesued.org/angebot/prompting-leicht-gemacht-ki-als-einsteiger-in-verstehen-und-nutzen)
 mit Julia
 📅 Dienstag, 8. Dezember 2026 | 9:00–13:00 Uhr
+
+Parisax-Akademie
+[KI für den Arbeitsalltag – Von Texten bis Tools](https://www.parisax-akademie.de/weiterbildungen/seminar/ki-fuer-den-arbeitsalltag-von-texten-bis-tools--3533)
+mit Julia
+📅 Mittwoch, 9. Dezember 2026 | 9:00–13:00 Uhr | Anmeldeschluss: 30. November
 
 Haus des Stiftens
 [Effizienter Posten: KI und Social Media](https://www.hausdesstiftens.org/online-workshop/effizienter-posten-ki-und-social-media-7/)
