@@ -70,10 +70,19 @@ Wandel gestalten
 mit Julia
 📅 20. Oktober bis 10. November 2026 | 4 Termine, dienstags 10:00–13:00 Uhr
 
+Parisax – Paritätische Akademie
+[KI als Assistenz: Routine clever automatisieren](https://www.parisax-akademie.de/weiterbildungen/seminar/ki-als-assistenz-routine-clever-automatisieren--3532)
+mit Julia
+📅 Mittwoch, 21. Oktober 2026 | 9:00–13:00 Uhr | Anmeldeschluss: 12. Oktober
+
 SKala-CAMPUS
 [AI-OS: Dein persönliches Betriebssystem für die Zusammenarbeit mit KI](https://www.skala-campus.org/event/ai-os/)
 mit SKala-CAMPUS
 📅 Dienstag, 27. Oktober 2026 | 9:00–10:00 Uhr | kostenlos
+
+BerufsWege für Frauen
+[Workshop: KI für Alle – Entdecke mit uns das FemAILab!](https://www.berufswege-fuer-frauen.de/portfolio/workshop-femaillab/)
+📅 Donnerstag, 29. Oktober 2026 | 17:00–21:00 Uhr | Wiesbaden | kostenlos
 
 Haus des Stiftens
 [Wie Sie KI erfolgreich in Ihre Organisation einführen](https://www.hausdesstiftens.org/online-workshop/wie-sie-ki-erfolgreich-in-ihre-organisation-einfuehren/)
@@ -87,10 +96,22 @@ CorrelAid
 mit CorrelAid
 📅 Montag, 2. November 2026 | 13:00–14:00 Uhr
 
+Fairlinked
+[Austauschtreffen – KI im Arbeitsalltag: Von der Theorie zur konkreten Anwendung](https://www.fairlinked.org/termine/03-11-austauschtreffen-ki-im-arbeitsalltag-von-der-theorie-zur-konkreten-anwendung/)
+📅 Dienstag, 3. November 2026 | 13:00–14:00 Uhr | kostenlos
+
+Fairlinked
+[Prompting & Strategien für die tägliche Arbeit](https://www.fairlinked.org/termine/03-11-prompting-strategien-fuer-die-taegliche-arbeit/)
+📅 Dienstag, 3. November 2026 | 17:30–19:30 Uhr
+
 AWO Weiterbildung
 [Workshop KI (Künstliche Intelligenz) für die Praxis](https://www.awo-wkb.de/kurse/verwaltung-und-it/kurs/KI-Grundlagen-fuer-die-Praxis/262E-35112)
 mit Elena Fronk
 📅 Mittwoch, 4. November 2026 | 9:00–13:00 Uhr
+
+Haus des Stiftens
+[KI für NPOs – Einfach starten, sinnvoll einsetzen](https://www.hausdesstiftens.org/webinar/ki-fuer-npos-einfach-starten-sinnvoll-einsetzen/)
+📅 Montag, 9. November 2026 | 9:00–10:00 Uhr | kostenlos
 
 Haus des Stiftens
 [MS Copilot – Smarter arbeiten mit KI](https://www.hausdesstiftens.org/online-workshop/ms-copilot-smarter-arbeiten-mit-ki-4/)
@@ -111,6 +132,11 @@ Haus des Stiftens
 [Freiwilligenkoordination durch KI-Einsatz erleichtern](https://www.hausdesstiftens.org/online-workshop/freiwilligenkoordination-durch-ki-einsatz-erleichtern-2/)
 mit Susanne
 📅 Dienstag, 17. November 2026 | 9:00–13:00 Uhr
+
+Haus des Stiftens
+[KI & Gesellschaft – Digitale Ethik im Fokus](https://www.hausdesstiftens.org/online-workshop/ki-gesellschaft-digitale-ethik-im-fokus-2/)
+mit Julia Kleeberger
+📅 Mittwoch, 18. November 2026 | 9:00–13:00 Uhr
 
 CorrelAid
 [Deep Dive: Künstliche Intelligenz](https://correlaid.org/veranstaltungen/deepdive-ki-2026-02)
@@ -138,6 +164,11 @@ Paritätische Akademie Süd
 [Prompting leicht gemacht – KI als Einsteiger*in verstehen und nutzen](https://akademiesued.org/angebot/prompting-leicht-gemacht-ki-als-einsteiger-in-verstehen-und-nutzen)
 mit Julia
 📅 Dienstag, 8. Dezember 2026 | 9:00–13:00 Uhr
+
+Parisax – Paritätische Akademie
+[KI für den Arbeitsalltag – Von Texten bis Tools](https://www.parisax-akademie.de/weiterbildungen/seminar/ki-fuer-den-arbeitsalltag-von-texten-bis-tools--3533)
+mit Julia
+📅 Mittwoch, 9. Dezember 2026 | 9:00–13:00 Uhr | Anmeldeschluss: 30. November
 
 Haus des Stiftens
 [Effizienter Posten: KI und Social Media](https://www.hausdesstiftens.org/online-workshop/effizienter-posten-ki-und-social-media-7/)
