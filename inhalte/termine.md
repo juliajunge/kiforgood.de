@@ -65,6 +65,11 @@ Haus des Stiftens
 mit Melisa M. Çiçek
 📅 Dienstag, 13. Oktober 2026 | 11:00–12:00 Uhr | kostenlos
 
+Parisax-Akademie
+[KI als Assistenz: Routine clever automatisieren](https://www.parisax-akademie.de/weiterbildungen/seminar/ki-als-assistenz-routine-clever-automatisieren--3532)
+mit Julia
+📅 Mittwoch, 21. Oktober 2026 | 9:00–13:00 Uhr
+
 Wandel gestalten
 [KI-Lernreise für NGOs: „Von Prompts zu Projekten“](https://www.juliajunge.de/ki-lernreise-klassik/)
 mit Julia
@@ -97,10 +102,19 @@ Haus des Stiftens
 mit Barbara Zeidler
 📅 Montag, 9. November 2026 | 9:00–12:30 Uhr
 
+Haus des Stiftens
+[KI für NPOs – Einfach starten, sinnvoll einsetzen](https://www.hausdesstiftens.org/webinar/ki-fuer-npos-einfach-starten-sinnvoll-einsetzen/)
+📅 Montag, 9. November 2026 | 9:00–10:00 Uhr | kostenlos
+
 AWO Weiterbildung
 [Workshop KI (Künstliche Intelligenz) für die Praxis](https://www.awo-wkb.de/kurse/verwaltung-und-it/kurs/KI-Grundlagen-fuer-die-Praxis/262E-35111)
 mit Elena Fronk
 📅 Mittwoch, 11. November 2026 | 10:00–14:30 Uhr | Essen
+
+PRO-BONO-CAMP
+[Der digitale Praktikant – Was KI heute für Non-Profits übernehmen kann](https://www.pro-bono-camp.org/event/was-ki-heute-fuer-non-profits-uebernehmen-kann/)
+mit Lena Becker und Dr. Julia Bauer
+📅 Mittwoch, 11. November 2026 | 12:00–13:00 Uhr
 
 Landesservicestelle für bürgerschaftliches Engagement NRW
 [KI im Ehrenamt: Datenschutz & Co. im Blick](https://veranstaltungen-landesservicestelle-nrw.de/recht-regeln/datenschutz-ki/)
@@ -111,6 +125,11 @@ Haus des Stiftens
 [Freiwilligenkoordination durch KI-Einsatz erleichtern](https://www.hausdesstiftens.org/online-workshop/freiwilligenkoordination-durch-ki-einsatz-erleichtern-2/)
 mit Susanne
 📅 Dienstag, 17. November 2026 | 9:00–13:00 Uhr
+
+Haus des Stiftens
+[KI & Gesellschaft – Digitale Ethik im Fokus](https://www.hausdesstiftens.org/online-workshop/ki-gesellschaft-digitale-ethik-im-fokus-2/)
+mit Dr. Julia Kleeberger
+📅 Mittwoch, 18. November 2026 | 9:00–13:00 Uhr
 
 CorrelAid
 [Deep Dive: Künstliche Intelligenz](https://correlaid.org/veranstaltungen/deepdive-ki-2026-02)
@@ -138,6 +157,11 @@ Paritätische Akademie Süd
 [Prompting leicht gemacht – KI als Einsteiger*in verstehen und nutzen](https://akademiesued.org/angebot/prompting-leicht-gemacht-ki-als-einsteiger-in-verstehen-und-nutzen)
 mit Julia
 📅 Dienstag, 8. Dezember 2026 | 9:00–13:00 Uhr
+
+Parisax-Akademie
+[KI für den Arbeitsalltag – Von Texten bis Tools](https://www.parisax-akademie.de/weiterbildungen/seminar/ki-fuer-den-arbeitsalltag-von-texten-bis-tools--3533)
+mit Julia
+📅 Mittwoch, 9. Dezember 2026 | 9:00–13:00 Uhr
 
 Haus des Stiftens
 [Effizienter Posten: KI und Social Media](https://www.hausdesstiftens.org/online-workshop/effizienter-posten-ki-und-social-media-7/)
