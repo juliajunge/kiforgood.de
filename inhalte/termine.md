@@ -87,10 +87,24 @@ CorrelAid
 mit CorrelAid
 📅 Montag, 2. November 2026 | 13:00–14:00 Uhr
 
+CorrelAid
+[KI kritisch hinterfragen… warum? Datenschutz, Nachhaltigkeit und Diskriminierung verstehen](https://correlaid.org/veranstaltungen/ws-ki-3)
+mit CorrelAid
+📅 Montag, 2. November 2026 | 17:00–18:30 Uhr
+
 AWO Weiterbildung
 [Workshop KI (Künstliche Intelligenz) für die Praxis](https://www.awo-wkb.de/kurse/verwaltung-und-it/kurs/KI-Grundlagen-fuer-die-Praxis/262E-35112)
 mit Elena Fronk
 📅 Mittwoch, 4. November 2026 | 9:00–13:00 Uhr
+
+Paritätische Akademie Süd
+[KI und Social Media – spannende Tools für Ihre Öffentlichkeitsarbeit](https://akademiesued.org/angebot/ki-und-social-media-spannende-tools-fuer-ihre-oeffentlichkeitsarbeit)
+mit Kathrin Schumann
+📅 Donnerstag, 5. November 2026 | 9:00–13:00 Uhr
+
+Haus des Stiftens
+[KI für NPOs – Einfach starten, sinnvoll einsetzen](https://www.hausdesstiftens.org/webinar/ki-fuer-npos-einfach-starten-sinnvoll-einsetzen/)
+📅 Montag, 9. November 2026 | 9:00–10:00 Uhr | kostenlos
 
 Haus des Stiftens
 [MS Copilot – Smarter arbeiten mit KI](https://www.hausdesstiftens.org/online-workshop/ms-copilot-smarter-arbeiten-mit-ki-4/)
@@ -108,9 +122,23 @@ mit Dr. Kristina Schreiber
 📅 Mittwoch, 11. November 2026 | 12:00–13:00 Uhr
 
 Haus des Stiftens
+[Der digitale Praktikant – Was KI heute für Non-Profits übernehmen kann](https://www.hausdesstiftens.org/webinar/selbstfuersorge-kleine-schritte-grosse-wirkung/)
+📅 Mittwoch, 11. November 2026 | 12:00–13:00 Uhr | kostenlos
+
+CorrelAid
+[KI richtig nutzen… wie? Tipps und Tricks für Kommunikation und Wissensmanagement](https://correlaid.org/veranstaltungen/ws-ki-4)
+mit CorrelAid
+📅 Montag, 16. November 2026 | 17:00–18:30 Uhr
+
+Haus des Stiftens
 [Freiwilligenkoordination durch KI-Einsatz erleichtern](https://www.hausdesstiftens.org/online-workshop/freiwilligenkoordination-durch-ki-einsatz-erleichtern-2/)
 mit Susanne
 📅 Dienstag, 17. November 2026 | 9:00–13:00 Uhr
+
+Haus des Stiftens
+[KI & Gesellschaft – Digitale Ethik im Fokus](https://www.hausdesstiftens.org/online-workshop/ki-gesellschaft-digitale-ethik-im-fokus-2/)
+mit Julia Kleeberger
+📅 Mittwoch, 18. November 2026 | 9:00–13:00 Uhr
 
 CorrelAid
 [Deep Dive: Künstliche Intelligenz](https://correlaid.org/veranstaltungen/deepdive-ki-2026-02)
@@ -135,6 +163,16 @@ mit Jana
 📅 Dienstag, 1. Dezember 2026 | 9:00–13:00 Uhr
 
 Paritätische Akademie Süd
+[KI, Soziale Arbeit und digitale Ethik – Verheißung oder Dystopie?](https://akademiesued.org/angebot/ki-soziale-arbeit-und-digitale-ethik-verheissung-oder-dystopie)
+mit Prof. Dr. Michael Domes
+📅 Mittwoch, 2. Dezember 2026 | 9:00–12:00 Uhr
+
+CorrelAid
+[KI Nutzung vereinheitlichen… womit? Leitlinien für eure Organisation entwickeln](https://correlaid.org/veranstaltungen/ws-ki-5)
+mit CorrelAid
+📅 Donnerstag, 3. Dezember 2026 | 17:00–18:30 Uhr
+
+Paritätische Akademie Süd
 [Prompting leicht gemacht – KI als Einsteiger*in verstehen und nutzen](https://akademiesued.org/angebot/prompting-leicht-gemacht-ki-als-einsteiger-in-verstehen-und-nutzen)
 mit Julia
 📅 Dienstag, 8. Dezember 2026 | 9:00–13:00 Uhr
@@ -148,6 +186,11 @@ Haus des Stiftens
 [MS Copilot – Smarter arbeiten mit KI](https://www.hausdesstiftens.org/online-workshop/ms-copilot-smarter-arbeiten-mit-ki-4/)
 mit Barbara Zeidler
 📅 Donnerstag, 10. Dezember 2026 | 9:00–12:30 Uhr
+
+Paritätische Akademie Süd
+[KI im sozialen Bereich: Einstieg, Anwendung & Ausprobieren für Einsteiger*innen](https://akademiesued.org/angebot/ki-im-sozialen-bereich-einstieg-anwendung-and-ausprobieren-fuer-einsteiger-innen)
+mit Martina Kohrn
+📅 Montag, 14. Dezember 2026 | 9:00–13:00 Uhr
 
 Paritätische Akademie Süd
 [Prompting und Assistenzen – KI verstehen und nutzen für Fortgeschrittene](https://akademiesued.org/angebot/prompting-und-assistenzen-ki-verstehen-und-nutzen-fuer-fortgeschrittene)
