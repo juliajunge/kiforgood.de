@@ -93,6 +93,10 @@ mit Elena Fronk
 📅 Mittwoch, 4. November 2026 | 9:00–13:00 Uhr
 
 Haus des Stiftens
+[KI für NPOs – Einfach starten, sinnvoll einsetzen](https://www.hausdesstiftens.org/webinar/ki-fuer-npos-einfach-starten-sinnvoll-einsetzen/)
+📅 Montag, 9. November 2026 | 9:00–10:00 Uhr | kostenlos
+
+Haus des Stiftens
 [MS Copilot – Smarter arbeiten mit KI](https://www.hausdesstiftens.org/online-workshop/ms-copilot-smarter-arbeiten-mit-ki-4/)
 mit Barbara Zeidler
 📅 Montag, 9. November 2026 | 9:00–12:30 Uhr
@@ -108,9 +112,18 @@ mit Dr. Kristina Schreiber
 📅 Mittwoch, 11. November 2026 | 12:00–13:00 Uhr
 
 Haus des Stiftens
+[Der digitale Praktikant – Was KI heute für Non-Profits übernehmen kann](https://www.hausdesstiftens.org/webinar/selbstfuersorge-kleine-schritte-grosse-wirkung/)
+📅 Mittwoch, 11. November 2026 | 12:00–13:00 Uhr | kostenlos
+
+Haus des Stiftens
 [Freiwilligenkoordination durch KI-Einsatz erleichtern](https://www.hausdesstiftens.org/online-workshop/freiwilligenkoordination-durch-ki-einsatz-erleichtern-2/)
 mit Susanne
 📅 Dienstag, 17. November 2026 | 9:00–13:00 Uhr
+
+Haus des Stiftens
+[KI & Gesellschaft – Digitale Ethik im Fokus](https://www.hausdesstiftens.org/online-workshop/ki-gesellschaft-digitale-ethik-im-fokus-2/)
+mit Julia Kleeberger
+📅 Mittwoch, 18. November 2026 | 9:00–13:00 Uhr
 
 CorrelAid
 [Deep Dive: Künstliche Intelligenz](https://correlaid.org/veranstaltungen/deepdive-ki-2026-02)
