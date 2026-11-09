@@ -112,6 +112,11 @@ Haus des Stiftens
 mit Susanne
 📅 Dienstag, 17. November 2026 | 9:00–13:00 Uhr
 
+Haus des Stiftens
+[KI & Gesellschaft – Digitale Ethik im Fokus](https://www.hausdesstiftens.org/online-workshop/ki-gesellschaft-digitale-ethik-im-fokus-2/)
+mit Julia Kleeberger
+📅 Mittwoch, 18. November 2026 | 9:00–13:00 Uhr
+
 CorrelAid
 [Deep Dive: Künstliche Intelligenz](https://correlaid.org/veranstaltungen/deepdive-ki-2026-02)
 mit CorrelAid
@@ -153,3 +158,17 @@ Paritätische Akademie Süd
 [Prompting und Assistenzen – KI verstehen und nutzen für Fortgeschrittene](https://akademiesued.org/angebot/prompting-und-assistenzen-ki-verstehen-und-nutzen-fuer-fortgeschrittene)
 mit Julia
 📅 Dienstag, 15. Dezember 2026 | 9:00–13:00 Uhr
+
+## Januar 2027
+
+Haus des Stiftens
+[Wissensmanagement mit KI erleichtern](https://www.hausdesstiftens.org/online-workshop/wissensmanagement-mit-ki-erleichtern/)
+mit Susanne
+📅 Donnerstag, 28. Januar 2027 | 9:00–13:00 Uhr
+
+## Februar 2027
+
+Haus des Stiftens
+[Effizienter Posten: KI und Social Media](https://www.hausdesstiftens.org/online-workshop/effizienter-posten-ki-und-social-media/)
+mit Lucas Söker
+📅 Mittwoch, 3. Februar 2027 | 9:00–13:00 Uhr
