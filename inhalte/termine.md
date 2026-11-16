@@ -112,6 +112,11 @@ Haus des Stiftens
 mit Susanne
 📅 Dienstag, 17. November 2026 | 9:00–13:00 Uhr
 
+Haus des Stiftens
+[KI verstehen: Grundlagen und erste Schritte](https://www.hausdesstiftens.org/webinar/ki-verstehen-grundlagen-und-erste-schritte-3/)
+mit Dirk Weber
+📅 Dienstag, 24. November 2026 | 11:00–12:00 Uhr | kostenlos
+
 CorrelAid
 [Deep Dive: Künstliche Intelligenz](https://correlaid.org/veranstaltungen/deepdive-ki-2026-02)
 mit CorrelAid
@@ -134,6 +139,16 @@ Haus des Stiftens
 mit Jana
 📅 Dienstag, 1. Dezember 2026 | 9:00–13:00 Uhr
 
+Haus des Stiftens
+[Storytelling mit KI: Wirkung sichtbar machen](https://www.hausdesstiftens.org/webinar/storytelling-mit-ki-wirkung-sichtbar-machen/)
+mit Jana
+📅 Donnerstag, 3. Dezember 2026 | 11:00–12:00 Uhr | kostenlos
+
+Haus des Stiftens
+[KI-Werkzeuge sicher nutzen – Schritt für Schritt](https://www.hausdesstiftens.org/webinar/ki-werkzeuge-sicher-nutzen/)
+mit Susanne
+📅 Dienstag, 8. Dezember 2026 | 11:00–12:00 Uhr | kostenlos
+
 Paritätische Akademie Süd
 [Prompting leicht gemacht – KI als Einsteiger*in verstehen und nutzen](https://akademiesued.org/angebot/prompting-leicht-gemacht-ki-als-einsteiger-in-verstehen-und-nutzen)
 mit Julia
@@ -148,6 +163,11 @@ Haus des Stiftens
 [MS Copilot – Smarter arbeiten mit KI](https://www.hausdesstiftens.org/online-workshop/ms-copilot-smarter-arbeiten-mit-ki-4/)
 mit Barbara Zeidler
 📅 Donnerstag, 10. Dezember 2026 | 9:00–12:30 Uhr
+
+Haus des Stiftens
+[Live-Challenge: Copilot Basic vs. Premium](https://www.hausdesstiftens.org/webinar/live-challenge-copilot-basic-vs-premium/)
+mit Susanne und Jana
+📅 Donnerstag, 10. Dezember 2026 | 11:00–12:00 Uhr | kostenlos
 
 Paritätische Akademie Süd
 [Prompting und Assistenzen – KI verstehen und nutzen für Fortgeschrittene](https://akademiesued.org/angebot/prompting-und-assistenzen-ki-verstehen-und-nutzen-fuer-fortgeschrittene)
