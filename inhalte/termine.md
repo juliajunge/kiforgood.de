@@ -134,6 +134,16 @@ Haus des Stiftens
 mit Jana
 📅 Dienstag, 1. Dezember 2026 | 9:00–13:00 Uhr
 
+Haus des Stiftens
+[Microsoft 365 Copilot für Word, Excel & Co.](https://www.hausdesstiftens.org/webinar/microsoft-365-copilot-fuer-word-excel-und-co/)
+mit Dirk Weber
+📅 Dienstag, 1. Dezember 2026 | 11:00–12:00 Uhr | kostenlos
+
+Haus des Stiftens
+[KI-Werkzeuge sicher nutzen – Schritt für Schritt](https://www.hausdesstiftens.org/webinar/ki-werkzeuge-sicher-nutzen/)
+mit Susanne
+📅 Dienstag, 8. Dezember 2026 | 11:00–12:00 Uhr | kostenlos
+
 Paritätische Akademie Süd
 [Prompting leicht gemacht – KI als Einsteiger*in verstehen und nutzen](https://akademiesued.org/angebot/prompting-leicht-gemacht-ki-als-einsteiger-in-verstehen-und-nutzen)
 mit Julia
@@ -148,6 +158,11 @@ Haus des Stiftens
 [MS Copilot – Smarter arbeiten mit KI](https://www.hausdesstiftens.org/online-workshop/ms-copilot-smarter-arbeiten-mit-ki-4/)
 mit Barbara Zeidler
 📅 Donnerstag, 10. Dezember 2026 | 9:00–12:30 Uhr
+
+Haus des Stiftens
+[Live-Challenge: Copilot Basic vs. Premium](https://www.hausdesstiftens.org/webinar/live-challenge-copilot-basic-vs-premium/)
+mit Susanne und Jana
+📅 Donnerstag, 10. Dezember 2026 | 11:00–12:00 Uhr | kostenlos
 
 Paritätische Akademie Süd
 [Prompting und Assistenzen – KI verstehen und nutzen für Fortgeschrittene](https://akademiesued.org/angebot/prompting-und-assistenzen-ki-verstehen-und-nutzen-fuer-fortgeschrittene)
